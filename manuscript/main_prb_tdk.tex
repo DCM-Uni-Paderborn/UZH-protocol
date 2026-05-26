@@ -196,16 +196,25 @@ This molecular step is not intended to replace the periodic verification workflo
 Distribution of relative bond-length errors for the molecular calibration set. Outliers are omitted from the box plot to emphasize the median and interquartile behavior. The systematic narrowing from DZVP to TZV2P indicates controlled basis-set convergence for local structural properties.}
 \end{figure}
 
-Figure~\ref{fig:molecular_response} extends the same analysis beyond local bond distances. Nonlinear bond angles and dihedral angles are more sensitive than bond lengths to subtle changes in the electronic structure and to the automated matching of nearly symmetric structures, but the hierarchy of basis quality remains visible. Dipole moments and polarizabilities provide a stronger test because they probe the response of the density rather than only the optimized geometry. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
-
-The combined molecular data therefore support two practical choices. First, DZVP is useful as an economical screening level, but it should not be interpreted as a converged basis for response-sensitive properties. Second, TZV2P provides a more balanced reference level for the UZH optimization loop because it improves both covalent and polar bonding motifs without introducing the numerical fragility that would compromise large periodic calculations. This balance between chemical flexibility and numerical stability is essential: the goal is not to make the largest possible Gaussian basis, but to construct a basis that can be improved systematically together with the corresponding GTH-UZH pseudopotential files.
+Figure~\ref{fig:molecular_angles} extends the same analysis beyond local bond distances. Nonlinear bond angles and dihedral angles are more sensitive than bond lengths to subtle changes in the electronic structure and to the automated matching of nearly symmetric structures, but the hierarchy of basis quality remains visible.
 
 \begin{figure*}
-\includegraphics[width=0.49\textwidth]{TM_mol_2.png}
-\includegraphics[width=0.49\textwidth]{TM_mol_3.png}
-\caption{\label{fig:molecular_response}
-Molecular calibration beyond bond lengths. Left: relative errors for nonlinear and dihedral angles. Right: relative errors for dipole moments and average molecular polarizabilities. Response properties are more demanding than equilibrium bond lengths, but they retain the systematic basis-set improvement needed before transferring the basis to periodic verification.}
+\centering
+\includegraphics[width=\textwidth]{TM_mol_2.png}
+\caption{\label{fig:molecular_angles}
+Molecular calibration of angular observables. The distributions show relative errors for nonlinear angles and dihedral angles. These quantities are more sensitive than bond lengths to automated atom matching and near-symmetric geometries, but they retain the same systematic basis-set trend.}
 \end{figure*}
+
+Figure~\ref{fig:molecular_response} shows the corresponding response-property tests. Dipole moments and polarizabilities provide a stronger probe because they measure the response of the density rather than only the optimized geometry. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
+
+\begin{figure*}
+\centering
+\includegraphics[width=0.78\textwidth]{TM_mol_3.png}
+\caption{\label{fig:molecular_response}
+Molecular calibration of response properties. The distributions show relative errors for dipole moments and average molecular polarizabilities. Response properties are more demanding than equilibrium bond lengths, but they retain the systematic basis-set improvement needed before transferring the basis to periodic verification.}
+\end{figure*}
+
+The combined molecular data therefore support two practical choices. First, DZVP is useful as an economical screening level, but it should not be interpreted as a converged basis for response-sensitive properties. Second, TZV2P provides a more balanced reference level for the UZH optimization loop because it improves both covalent and polar bonding motifs without introducing the numerical fragility that would compromise large periodic calculations. This balance between chemical flexibility and numerical stability is essential: the goal is not to make the largest possible Gaussian basis, but to construct a basis that can be improved systematically together with the corresponding GTH-UZH pseudopotential files.
 
 \subsection{Total error of the original UZH settings}
 
