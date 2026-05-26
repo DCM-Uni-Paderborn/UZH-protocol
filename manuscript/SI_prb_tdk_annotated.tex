@@ -97,18 +97,18 @@ For heavy elements the relativistic settings are part of the definition of the r
 
 \section{Molecular calibration}
 
-The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. \TDKin{The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. }The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
+The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. \TDKin{The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. Figures~\ref{fig:si_tm4} and \ref{fig:si_tm5} complement the main-text geometry and response-property plots by showing the two automated tests that are most sensitive to numerical details: vibrational frequencies and PBE0 calculations with the auxiliary density matrix method. }The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{TM_mol_4.png}
 \caption{\label{fig:si_tm4}
-Additional molecular benchmark statistics for the UZH-MOLOPT basis sequence.}
+\TDKout{Additional molecular benchmark statistics for the UZH-MOLOPT basis sequence.}\TDKin{Distribution of averaged minimal relative errors for matched vibrational frequencies. The frequency analysis is both a stringent basis-set test and a filter for structures that converged to non-minimum stationary points.}}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{TM_mol_5.png}
 \caption{\label{fig:si_tm5}
-Additional molecular benchmark statistics for properties that are more sensitive to basis flexibility.}
+\TDKout{Additional molecular benchmark statistics for properties that are more sensitive to basis flexibility.}\TDKin{Direct comparison of PBE0 and PBE0 calculations with the auxiliary density matrix method for the same UZH-MOLOPT basis levels. Geometric observables remain close, while dipoles and polarizabilities provide the more sensitive tests of the auxiliary basis.}}
 \end{figure}
 
 \section{Representative equation-of-state curves}
