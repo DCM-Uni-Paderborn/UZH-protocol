@@ -80,14 +80,41 @@ This representation is well suited to GPW calculations because it can be evaluat
 
 \subsection{MOLOPT basis sets}
 
-MOLOPT basis sets are generally contracted Gaussian basis sets designed for density-functional calculations in gas and condensed phases~\cite{VandeVondele2007}. All radial functions of a given atom are built from shared primitive exponents, while contraction coefficients define valence and polarization flexibility. The optimization target balances accuracy and numerical stability,
+MOLOPT basis sets are generally contracted Gaussian basis sets designed for density-functional calculations in gas and condensed phases~\cite{VandeVondele2007}. For atom $A$, a contracted basis function in angular-momentum channel $l$ can be written as
+\begin{align}
+\chi_{A l m \nu}(\mathbf r)
+&=
+Y_{lm}(\hat{\mathbf r}_A) r_A^{l}
+\sum_{p=1}^{N_{Al}} c_{A l\nu p}
+\exp\left(-\alpha_{A l p} r_A^2\right),
+\label{eq:contracted_basis}\\
+r_A&=|\mathbf r-\mathbf R_A| ,
+\end{align}
+where $\nu$ labels contractions that share a compact primitive exponent set $\{\alpha_{A l p}\}$ and differ through the coefficients $c_{A l\nu p}$. Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
+
+The numerical stability of a candidate basis is measured with the molecular overlap matrix,
+\begin{equation}
+S_{\mu\nu}^{(M)}=\langle \chi_\mu|\chi_\nu\rangle_M,
+\qquad
+\kappa_B(M)=
+\frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}
+{\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
+\label{eq:overlap_condition}
+\end{equation}
+where $\kappa_B(M)$ is the condition number for basis level $B$ and molecule $M$. The MOLOPT optimization target balances accuracy and numerical stability,
 \begin{equation}
 \Omega =
-\sum_{B}\sum_{M} E^{\mathrm{tot}}_{B,M}
-+ \gamma\ln \kappa_{B,M},
+\sum_{B\in\mathcal B}\sum_{M\in\mathcal T}
+\left[
+\sum_{q\in\mathcal Q} w_q
+\left(
+\frac{q_{B,M}-q_M^{\mathrm{ref}}}{s_q}
+\right)^2
++ \gamma\ln\kappa_B(M)
+\right],
 \label{eq:molopt}
 \end{equation}
-where $B$ labels related basis levels, $M$ labels molecules in the training set, and $\kappa$ is the condition number of the overlap matrix. The logarithmic condition-number term is essential: diffuse primitives improve weak interactions and response properties, but unconstrained diffuse functions can create near-linear dependencies. In the MOLOPT construction, diffuse primitives are included within contractions, providing flexibility without making the overlap matrix numerically fragile.
+where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molecular training set, and $\mathcal Q$ contains the energy and property targets used during calibration. The scale factors $s_q$ make heterogeneous quantities comparable, and the weights $w_q$ control their relative importance. The logarithmic condition-number term is essential: diffuse primitives improve weak interactions and response properties, but unconstrained diffuse functions can create near-linear dependencies. In the MOLOPT construction, diffuse primitives are included within contractions, providing flexibility without making the overlap matrix numerically fragile.
 
 The UZH basis optimization follows this logic but makes the calibration explicit. Small molecules are used first because they probe chemically diverse bonding situations at modest cost, permit comparison to all-electron Gaussian references, and expose failures in geometries, dipoles, polarizabilities, and vibrational frequencies before the settings are transferred to solids. This molecular stage is not the final validation target; rather, it establishes a chemically balanced basis library that can then be assessed in a reproducible periodic workflow.
 
