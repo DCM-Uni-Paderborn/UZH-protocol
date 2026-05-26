@@ -133,14 +133,17 @@ Let $E_{\mathrm{C}}^{\mathrm{GTH}}(V)$ denote CP2K-GTH-UZH energies, $E_{\mathrm
 E_{\mathrm{C}}^{\mathrm{GTH}}(V)-E_{\mathrm{S}}^{\mathrm{AE}}(V).
 \end{equation}
 It can be decomposed as
+\begin{subequations}
+\label{eq:decomposition}
 \begin{align}
 \Delta_{\mathrm{tot}}(V)
-&=\Delta_{\mathrm{basis}}(V)+\Delta_{\mathrm{pp}}(V),\label{eq:decomposition}\\
+&=\Delta_{\mathrm{basis}}(V)+\Delta_{\mathrm{pp}}(V),\label{eq:decomposition_total}\\
 \Delta_{\mathrm{basis}}(V)
-&=E_{\mathrm{C}}^{\mathrm{GTH}}(V)-E_{\mathrm{S}}^{\mathrm{GTH}}(V),\\
+&=E_{\mathrm{C}}^{\mathrm{GTH}}(V)-E_{\mathrm{S}}^{\mathrm{GTH}}(V),\label{eq:decomposition_basis}\\
 \Delta_{\mathrm{pp}}(V)
-&=E_{\mathrm{S}}^{\mathrm{GTH}}(V)-E_{\mathrm{S}}^{\mathrm{AE}}(V).
+&=E_{\mathrm{S}}^{\mathrm{GTH}}(V)-E_{\mathrm{S}}^{\mathrm{AE}}(V).\label{eq:decomposition_pp}
 \end{align}
+\end{subequations}
 The first term measures the CP2K Gaussian-basis error for a fixed pseudopotential; the second term measures the pseudopotential error in a systematic basis. In practice, the comparisons are performed not at a single volume but over equation-of-state curves. We use the $\varepsilon$ metric of the verification project~\cite{Bosoni2024},
 \begin{equation}
 \varepsilon(a,b)=
