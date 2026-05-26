@@ -188,6 +188,8 @@ The optimization loop uses the updated CP2K ATOM code developed as part of the p
 
 The molecular benchmark confirms the expected systematic behavior of the UZH-MOLOPT sequence. Bond-length errors decrease from DZVP to TZVP and TZV2P, with the median relative error remaining small across the database. Carbon-containing bonds are particularly stable, while O- and F-containing compounds are more sensitive to polarization and diffuse flexibility in the smaller basis sets. The TZV2P level removes most of these systematic trends.
 
+This molecular step is not intended to replace the periodic verification workflow; it is the chemically local calibration that makes the subsequent solid-state test meaningful. A basis that performs well for equation-of-state curves but gives unbalanced molecular geometries, dipoles, or polarizabilities would not be transferable. Conversely, a molecularly optimized basis still has to be checked in condensed phases because diffuse functions, near-linear dependencies, and grid-coupling errors can become more severe in periodic calculations. The UZH protocol therefore uses the molecular benchmark as a first filter: the basis sequence must improve monotonically for local structural observables while keeping the overlap matrix sufficiently well conditioned for production GPW calculations.
+
 \begin{figure}
 \includegraphics[width=\linewidth]{TM_mol_1.png}
 \caption{\label{fig:bonds}
@@ -195,6 +197,8 @@ Distribution of relative bond-length errors for the molecular calibration set. O
 \end{figure}
 
 Angular properties follow the same pattern. Nonlinear bond angles and dihedral angles are more sensitive than bond lengths to subtle changes in the electronic structure, but the hierarchy of basis quality remains clear. Dipole moments and polarizabilities provide a stronger test because they probe the response of the density rather than only the optimized geometry. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
+
+The combined molecular data therefore support two practical choices. First, DZVP is useful as an economical screening level, but it should not be interpreted as a converged basis for response-sensitive properties. Second, TZV2P provides a more balanced reference level for the UZH optimization loop because it improves both covalent and polar bonding motifs without introducing the numerical fragility that would compromise large periodic calculations. This balance between chemical flexibility and numerical stability is essential: the goal is not to make the largest possible Gaussian basis, but to construct a basis that can be improved systematically together with the corresponding GTH-UZH pseudopotential files.
 
 \begin{figure*}
 \includegraphics[width=0.49\textwidth]{TM_mol_2.png}
@@ -206,6 +210,10 @@ Molecular calibration beyond bond lengths. Left: relative errors for nonlinear a
 \subsection{Total error of the original UZH settings}
 
 Figure~\ref{fig:total_old} shows the total practical error of the original CP2K-GTH-UZH settings relative to the SIRIUS-FP-LAPW reference. Several elements exhibit $\varepsilon>1$ for at least two unary structures, including noble gases, selected transition metals, and heavier main-group elements. This map is the error a user would observe if CP2K were treated as a black box. It is therefore the most direct measure of the protocol's practical accuracy, but by itself it does not reveal the origin of the discrepancy.
+
+The important point is that the outliers do not have a single chemical or numerical origin. Noble-gas solids are especially sensitive to the radial flexibility and diffuseness of the valence basis because their equation-of-state curves are shallow and dominated by weak interactions. Several transition-metal cases, in contrast, point to the quality of the frozen-core representation, semicore treatment, and scalar-relativistic transferability of the pseudopotential. Heavy main-group elements can combine both effects. The total-error map is therefore deliberately used as a starting point rather than as a final ranking of elements: it identifies where the original settings are insufficient, but the remedial action requires the decomposition in the next subsection.
+
+This distinction is central for interpreting $\varepsilon$. A large total error does not automatically mean that the CP2K Gaussian basis must be enlarged, and a small total error does not prove that basis and pseudopotential errors are individually negligible; partial cancellation is possible. For parameter development, the total CP2K-GTH-UZH versus SIRIUS-FP-LAPW comparison has to be read together with the two intermediate comparisons summarized in Table~\ref{tab:classification}. Only then can the protocol decide whether the next iteration should modify the MOLOPT basis, refit the GTH pseudopotential parameters, or treat both components.
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-vs-SIRIUS-LAPW-epsilon.png}
