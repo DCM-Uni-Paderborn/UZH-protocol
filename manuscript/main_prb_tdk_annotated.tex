@@ -1,4 +1,7 @@
 \documentclass[aps,prb,reprint,amsmath,amssymb,superscriptaddress,longbibliography,floatfix]{revtex4-2}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL /tmp/main_prb_tdk_before_basis_order.tex   Tue May 26 22:50:05 2026
+%DIF ADD main_prb_tdk.tex                           Tue May 26 22:48:53 2026
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -7,6 +10,51 @@
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{makecell}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF CTRADITIONAL PREAMBLE %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\definecolor{TDKgreen}{rgb}{0,0.45,0}
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage[stable]{footmisc} %DIF PREAMBLE
+\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue} #1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}#1}} %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_CTRADITIONAL %DIF PREAMBLE
+  moredelim=[il][\color{red}\scriptsize]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\sffamily]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+\lstset{extendedchars=\true,inputencoding=utf8}
+\newcommand{\TDKin}[1]{\textcolor{blue}{#1}}
+\newcommand{\TDKout}[1]{\textcolor{red}{#1}}
+\newcommand{\TDKcomment}[1]{\textcolor{TDKgreen}{\textbf{[TDK:} #1\textbf{]}}}
+
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
 
@@ -45,13 +93,47 @@ Density-functional theory (DFT) is routinely used as a predictive tool in conden
 
 This issue is particularly important for CP2K/Quickstep~\cite{CP2K2020,CP2KMadeSimple2026}, where Kohn-Sham orbitals are represented by atom-centered Gaussian functions and densities are mapped to auxiliary plane-wave grids within the Gaussian-and-plane-wave (GPW) formalism~\cite{Lippert1997GPW}. The approach is efficient for molecules, liquids, interfaces, and extended systems, but its accuracy depends jointly on two libraries: Gaussian basis sets and norm-conserving pseudopotentials. The two are usually chosen together, and their errors are often reported as a single code-to-code deviation. Such a holistic error is useful for users, but it is insufficient for method development because it does not say whether the dominant correction should be a larger or reoptimized basis set, a revised pseudopotential, or both.
 
-Here we formulate and apply what we call the UZH protocol. The protocol combines molecularly optimized (MOLOPT) basis sets~\cite{VandeVondele2007} with the analytic Goedecker--Teter--Hutter (GTH) family of separable dual-space Gaussian pseudopotentials and its Hartwigsen--Goedecker--Hutter (HGH) relativistic extension~\cite{Goedecker1996,Hartwigsen1998,Krack2005}. Its central idea is to close a loop between molecular calibration and solid-state verification. In the first step, the Gaussian basis is optimized and calibrated against small molecules, following the MOLOPT philosophy of minimizing both energy errors and ill-conditioning of the overlap matrix~\cite{VandeVondele2007}. In the second step, the resulting CP2K settings are tested in the reproducible unary-crystal workflow of the Automated Interactive Infrastructure and Database for Computational Science (AiiDA) common workflows~\cite{Huber2021,Bosoni2024}. In the third step, the total CP2K error is decomposed by using SIRIUS both with the same GTH-UZH pseudopotentials and as a full-potential linearized augmented-plane-wave (FP-LAPW) reference~\cite{Zhang2022Computation,Zhang2023Sirius,SiriusDocs}.
+Here we formulate and apply what we call the UZH protocol. The protocol combines \DIFaddbegin \DIFadd{molecularly optimized (MOLOPT) basis sets~\cite{VandeVondele2007} with }\DIFaddend the analytic Goedecker--Teter--Hutter (GTH) family of separable dual-space Gaussian pseudopotentials and its Hartwigsen--Goedecker--Hutter (HGH) relativistic extension~\cite{Goedecker1996,Hartwigsen1998,Krack2005}\DIFdelbegin \DIFdel{with molecularly optimized (MOLOPT) basis sets~\cite{VandeVondele2007}}\DIFdelend . Its central idea is to close a loop between molecular calibration and solid-state verification. In the first step, the Gaussian basis is optimized and calibrated against small molecules, following the MOLOPT philosophy of minimizing both energy errors and ill-conditioning of the overlap matrix~\cite{VandeVondele2007}. In the second step, the resulting CP2K settings are tested in the reproducible unary-crystal workflow of the Automated Interactive Infrastructure and Database for Computational Science (AiiDA) common workflows~\cite{Huber2021,Bosoni2024}. In the third step, the total CP2K error is decomposed by using SIRIUS both with the same GTH-UZH pseudopotentials and as a full-potential linearized augmented-plane-wave (FP-LAPW) reference~\cite{Zhang2022Computation,Zhang2023Sirius,SiriusDocs}.
 
-The decomposition is simple but powerful. CP2K-GTH-UZH and SIRIUS-GTH-UZH differ in the orbital representation while keeping the same pseudopotential fixed; their difference isolates the Gaussian-basis component. SIRIUS-GTH-UZH and SIRIUS-FP-LAPW share the same code infrastructure but differ in the core-electron approximation; their difference isolates the pseudopotential component. The comparison of CP2K-GTH-UZH with SIRIUS-FP-LAPW gives the total practical error of the UZH protocol. Because CP2K also contains the ATOM machinery for basis-set optimization, scalar-relativistic atomic calculations, and GTH pseudopotential fitting, the same framework can diagnose and then improve the underlying numerical libraries.
+The decomposition is simple but powerful. CP2K-GTH-UZH and SIRIUS-GTH-UZH \DIFdelbegin \DIFdel{use the same pseudopotential but different orbital representations}\DIFdelend \DIFaddbegin \DIFadd{differ in the orbital representation while keeping the same pseudopotential fixed}\DIFaddend ; their difference isolates the Gaussian-basis component. SIRIUS-GTH-UZH and SIRIUS-FP-LAPW share the same code infrastructure but differ in the core-electron approximation; their difference isolates the pseudopotential component. The comparison of CP2K-GTH-UZH with SIRIUS-FP-LAPW gives the total practical error of the UZH protocol. Because CP2K also contains the ATOM machinery for \DIFaddbegin \DIFadd{basis-set optimization, }\DIFaddend scalar-relativistic atomic calculations, \DIFaddbegin \DIFadd{and }\DIFaddend GTH pseudopotential fitting, \DIFdelbegin \DIFdel{and basis-set optimization, }\DIFdelend the same framework can diagnose and then improve the underlying numerical libraries.
 
 \section{Theory and protocol}
+\TDKcomment{The theory section and the terminology below were normalized to discuss basis-set effects before pseudopotential effects.}
 
-\subsection{MOLOPT basis sets}
+\DIFdelbegin \subsection{\DIFdel{Separable dual-space Gaussian pseudopotentials}}
+%DIFAUXCMD
+\addtocounter{subsection}{-1}%DIFAUXCMD
+%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdel{The GTH and HGH pseudopotentials are norm-conserving, angular-momentum-dependent pseudopotentials written in an analytic form that is compact in both real and reciprocal space~\cite{Goedecker1996,Hartwigsen1998}. Their local part is
+}\begin{multline*}
+\DIFdel{V_{\mathrm{loc}}^{\mathrm{pp}}(r) =
+-\frac{Z_{\mathrm{ion}}}{r}\operatorname{erf}\left(\alpha^{\mathrm{pp}} r\right)
++ \sum_{i=1}^{4} C_i^{\mathrm{pp}}
+\left(\sqrt{2}\alpha^{\mathrm{pp}} r\right)^{2i-2} }\\
+\DIFdel{\times \exp\left[-\left(\alpha^{\mathrm{pp}} r\right)^2\right],
+\qquad
+\alpha^{\mathrm{pp}}=\frac{1}{\sqrt{2}r_{\mathrm{loc}}^{\mathrm{pp}}},
+}\end{multline*}%DIFAUXCMD
+\DIFdel{and the nonlocal part is written as
+}\begin{displaymath}
+\DIFdel{V_{\mathrm{nl}}^{\mathrm{pp}}(\mathbf r,\mathbf r')
+=\sum_{lm}\sum_{ij}
+\langle \mathbf r|p_i^{lm}\rangle h_{ij}^{l}
+\langle p_j^{lm}|\mathbf r'\rangle .
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{The projectors have Gaussian radial factors,
+}\begin{displaymath}
+\DIFdel{\langle \mathbf r|p_i^{lm}\rangle =
+N_i^{l}Y^{lm}(\hat r) r^{l+2i-2}
+\exp\left[-\frac{1}{2}\left(\frac{r}{r_l}\right)^2\right].
+}\end{displaymath}%DIFAUXCMD
+\DIFdel{This representation is well suited to GPW calculations because it can be evaluated efficiently with Gaussian orbitals and on real-space grids, while also being compatible with plane-wave calculations. The relativistic HGH generalization extends the construction across the periodic table and retains the separable analytic structure~\cite{Hartwigsen1998}. In the UZH protocol, the GTH form is optimized with CP2K's ATOM program against scalar-relativistic atomic reference calculations, including valence and semicore information as needed.
+}%DIFDELCMD < 
+
+%DIFDELCMD < %%%
+\DIFdelend \subsection{MOLOPT basis sets}
 
 MOLOPT basis sets are generally contracted Gaussian basis sets designed for density-functional calculations in gas and condensed phases~\cite{VandeVondele2007}. For atom $A$, a contracted basis function in angular-momentum channel $l$ can be written as
 \begin{align}
@@ -70,8 +152,7 @@ The numerical stability of a candidate basis is measured with the molecular over
 S_{\mu\nu}^{(M)}=\langle \chi_\mu|\chi_\nu\rangle_M,
 \qquad
 \kappa_B(M)=
-\frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}
-{\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
+\frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}{\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
 \label{eq:overlap_condition}
 \end{equation}
 where $\kappa_B(M)$ is the condition number for basis level $B$ and molecule $M$. The MOLOPT optimization target balances accuracy and numerical stability,
@@ -91,34 +172,35 @@ where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molec
 
 The UZH basis optimization follows this logic but makes the calibration explicit. Small molecules are used first because they probe chemically diverse bonding situations at modest cost, permit comparison to all-electron Gaussian references, and expose failures in geometries, dipoles, polarizabilities, and vibrational frequencies before the settings are transferred to solids. This molecular stage is not the final validation target; rather, it establishes a chemically balanced basis library that can then be assessed in a reproducible periodic workflow.
 
-\subsection{Separable dual-space Gaussian pseudopotentials}
+\DIFaddbegin \subsection{\DIFadd{Separable dual-space Gaussian pseudopotentials}}
 
-The GTH and HGH pseudopotentials are norm-conserving, angular-momentum-dependent pseudopotentials written in an analytic form that is compact in both real and reciprocal space~\cite{Goedecker1996,Hartwigsen1998}. Their local part is
-\begin{multline}
-V_{\mathrm{loc}}^{\mathrm{pp}}(r) =
+\DIFadd{The GTH and HGH pseudopotentials are norm-conserving, angular-momentum-dependent pseudopotentials written in an analytic form that is compact in both real and reciprocal space~\cite{Goedecker1996,Hartwigsen1998}. Their local part is
+}\begin{multline}
+\DIFadd{V_{\mathrm{loc}}^{\mathrm{pp}}(r) =
 -\frac{Z_{\mathrm{ion}}}{r}\operatorname{erf}\left(\alpha^{\mathrm{pp}} r\right)
 + \sum_{i=1}^{4} C_i^{\mathrm{pp}}
-\left(\sqrt{2}\alpha^{\mathrm{pp}} r\right)^{2i-2} \\
-\times \exp\left[-\left(\alpha^{\mathrm{pp}} r\right)^2\right],
+\left(\sqrt{2}\alpha^{\mathrm{pp}} r\right)^{2i-2} }\\
+\DIFadd{\times \exp\left[-\left(\alpha^{\mathrm{pp}} r\right)^2\right],
 \qquad
 \alpha^{\mathrm{pp}}=\frac{1}{\sqrt{2}r_{\mathrm{loc}}^{\mathrm{pp}}},
-\end{multline}
-and the nonlocal part is written as
-\begin{equation}
-V_{\mathrm{nl}}^{\mathrm{pp}}(\mathbf r,\mathbf r')
+}\end{multline}
+\DIFadd{and the nonlocal part is written as
+}\begin{equation}
+\DIFadd{V_{\mathrm{nl}}^{\mathrm{pp}}(\mathbf r,\mathbf r')
 =\sum_{lm}\sum_{ij}
 \langle \mathbf r|p_i^{lm}\rangle h_{ij}^{l}
 \langle p_j^{lm}|\mathbf r'\rangle .
-\end{equation}
-The projectors have Gaussian radial factors,
-\begin{equation}
-\langle \mathbf r|p_i^{lm}\rangle =
+}\end{equation}
+\DIFadd{The projectors have Gaussian radial factors,
+}\begin{equation}
+\DIFadd{\langle \mathbf r|p_i^{lm}\rangle =
 N_i^{l}Y^{lm}(\hat r) r^{l+2i-2}
 \exp\left[-\frac{1}{2}\left(\frac{r}{r_l}\right)^2\right].
-\end{equation}
-This representation is well suited to GPW calculations because it can be evaluated efficiently with Gaussian orbitals and on real-space grids, while also being compatible with plane-wave calculations. The relativistic HGH generalization extends the construction across the periodic table and retains the separable analytic structure~\cite{Hartwigsen1998}. In the UZH protocol, the GTH form is optimized with CP2K's ATOM program against scalar-relativistic atomic reference calculations, including valence and semicore information as needed.
+}\end{equation}
+\DIFadd{This representation is well suited to GPW calculations because it can be evaluated efficiently with Gaussian orbitals and on real-space grids, while also being compatible with plane-wave calculations. The relativistic HGH generalization extends the construction across the periodic table and retains the separable analytic structure~\cite{Hartwigsen1998}. In the UZH protocol, the GTH form is optimized with CP2K's ATOM program against scalar-relativistic atomic reference calculations, including valence and semicore information as needed.
+}
 
-\subsection{Error decomposition}
+\DIFaddend \subsection{Error decomposition}
 
 Let $E_{\mathrm{C}}^{\mathrm{GTH}}(V)$ denote CP2K-GTH-UZH energies, $E_{\mathrm{S}}^{\mathrm{GTH}}(V)$ SIRIUS-GTH-UZH energies, and $E_{\mathrm{S}}^{\mathrm{AE}}(V)$ SIRIUS-FP-LAPW all-electron (AE) energies for the same structure and volume. The total deviation of the practical CP2K protocol is
 \begin{equation}
@@ -138,8 +220,7 @@ The first term measures the CP2K Gaussian-basis error for a fixed pseudopotentia
 \begin{equation}
 \varepsilon(a,b)=
 \sqrt{
-\frac{\sum_i \left[E_a(V_i)-E_b(V_i)\right]^2}
-{\sqrt{
+\frac{\sum_i \left[E_a(V_i)-E_b(V_i)\right]^2}{\sqrt{
 \sum_i\left[E_a(V_i)-\langle E_a\rangle\right]^2
 \sum_i\left[E_b(V_i)-\langle E_b\rangle\right]^2}}},
 \label{eq:epsilon}
@@ -168,7 +249,7 @@ The relativistic treatment was kept consistent with the scalar-relativistic GTH/
 
 \subsection{CP2K ATOM and closed-loop optimization}
 
-The optimization loop uses CP2K's ATOM code. Inspection of the CP2K source and input reference shows that the ATOM input layer supports energy calculations, basis optimization, and pseudopotential optimization as distinct run types; scalar-relativistic atomic reference calculations can be generated with zeroth-order regular approximation (ZORA)-type and Douglas--Kroll--Hess Hamiltonians; and GTH pseudopotentials can be read, printed, fitted, and exported~\cite{CP2K2020,CP2KMadeSimple2026}. The basis optimizer uses template, work, and output basis files and allows the condition number of the overlap matrix to enter the training objective. The pseudopotential optimizer constructs all-electron and pseudopotential atomic references with explicit core, valence, and semicore occupations, evaluates orbital energies and radial charges, and uses a Powell-type derivative-free optimization to fit the compact GTH parameter set~\cite{Powell1964}. These implementation details are important because they make CP2K not merely the code under test, but also the code that can generate revised scalar-relativistic basis and pseudopotential libraries after the error decomposition has identified the limiting approximation.
+The optimization loop uses CP2K's ATOM code. Inspection of the CP2K source and input reference shows that the ATOM input layer supports energy calculations, basis optimization, and pseudopotential optimization as distinct run types; scalar-relativistic atomic reference calculations can be generated with zeroth-order regular approximation (ZORA)-type and Douglas--Kroll--Hess Hamiltonians; and GTH pseudopotentials can be read, printed, fitted, and exported~\cite{CP2K2020,CP2KMadeSimple2026}. The \DIFaddbegin \DIFadd{basis optimizer uses template, work, and output basis files and allows the condition number of the overlap matrix to enter the training objective. The }\DIFaddend pseudopotential optimizer constructs all-electron and pseudopotential atomic references with explicit core, valence, and semicore occupations, evaluates orbital energies and radial charges, and uses a Powell-type derivative-free optimization to fit the compact GTH parameter set~\cite{Powell1964}. \DIFdelbegin \DIFdel{The basis optimizer uses template, work, and output basis files and allows the condition number of the overlap matrix to enter the training objective. }\DIFdelend These implementation details are important because they make CP2K not merely the code under test, but also the code that can generate revised scalar-relativistic basis and pseudopotential libraries after the error decomposition has identified the limiting approximation.
 
 \section{Results and discussion}
 
@@ -208,31 +289,37 @@ Qualitative classification of dominant error sources in the original UZH setting
 \begin{tabular}{lll}
 Dominant source & Diagnostic signature & Representative elements \\
 \hline
+\DIFdelFL{Pseudopotential} & \DIFdelFL{Large SIRIUS-GTH-UZH vs SIRIUS-FP-LAPW error} & \DIFdelFL{Ca, Cr, Pd, Rh, Ru, Tc} \\
 Basis set & Large CP2K-GTH-UZH vs SIRIUS-GTH-UZH error & He, Ne, Ar, Kr, Xe, Rn, Ba \\
-Pseudopotential & Large SIRIUS-GTH-UZH vs SIRIUS-FP-LAPW error & Ca, Cr, Pd, Rh, Ru, Tc \\
-Mixed & Both components visible & Hg and selected heavy elements \\
+\DIFaddbeginFL \DIFaddFL{Pseudopotential }& \DIFaddFL{Large SIRIUS-GTH-UZH vs SIRIUS-FP-LAPW error }& \DIFaddFL{Ca, Cr, Pd, Rh, Ru, Tc }\\
+\DIFaddendFL Mixed & Both components visible & Hg and selected heavy elements \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
 
 \subsection{Separating basis and pseudopotential errors}
 
-The decomposition in Eq.~(\ref{eq:decomposition}) reveals three distinct regimes. First, the noble gases and selected elements such as Ba are basis limited. SIRIUS-GTH-UZH agrees well with SIRIUS-FP-LAPW, indicating that the GTH-UZH pseudopotential is transferable for these tests, but CP2K-GTH-UZH deviates from SIRIUS-GTH-UZH. These cases point to missing diffuse or polarization flexibility in the Gaussian basis for weakly bound or highly compressible solids. This observation is physically plausible because noble-gas equation-of-state curves are shallow and therefore sensitive to small basis-set and basis-set-superposition effects.
+The decomposition in Eq.~(\ref{eq:decomposition}) reveals three distinct regimes. First, \DIFdelbegin \DIFdel{for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
+}%DIFDELCMD < 
 
-Second, for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
+%DIFDELCMD < %%%
+\DIFdel{Second, the }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend noble gases and selected elements such as Ba are basis limited. SIRIUS-GTH-UZH agrees well with SIRIUS-FP-LAPW, indicating that the GTH-UZH pseudopotential is transferable for these tests, but CP2K-GTH-UZH deviates from SIRIUS-GTH-UZH. These cases point to missing diffuse or polarization flexibility in the Gaussian basis for weakly bound or highly compressible solids. This observation is physically plausible because noble-gas equation-of-state curves are shallow and therefore sensitive to small basis-set and basis-set-superposition effects.
 
-Third, some heavy elements show mixed behavior. In these cases both pairwise comparisons are non-negligible, and the improvement strategy must combine pseudopotential refitting with basis-set extension or reoptimization.
+\DIFaddbegin \DIFadd{Second, for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
+}
+
+\DIFaddend Third, some heavy elements show mixed behavior. In these cases both pairwise comparisons are non-negligible, and the improvement strategy must combine pseudopotential refitting with basis-set extension or reoptimization.
 
 \begin{figure*}
 \includegraphics[width=0.49\textwidth]{periodic-table-unaries-SIRIUS-UZH-vs-SIRIUS-LAPW-epsilon.png}
 \includegraphics[width=0.49\textwidth]{periodic-table-unaries-CP2K-UZH-vs-SIRIUS-UZH-epsilon.png}
 \caption{\label{fig:pp_basis_old}
-Error decomposition for the original UZH settings. Right: CP2K-GTH-UZH relative to SIRIUS-GTH-UZH, which isolates the Gaussian-basis error. Left: SIRIUS-GTH-UZH relative to SIRIUS-FP-LAPW, which isolates the pseudopotential error.}
+Error decomposition for the original UZH settings. \DIFdelbeginFL \DIFdelFL{Left}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Right}\DIFaddendFL : \DIFdelbeginFL \DIFdelFL{SIRIUS-GTH-UZH }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{CP2K-GTH-UZH }\DIFaddendFL relative to \DIFdelbeginFL \DIFdelFL{SIRIUS-FP-LAPW}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{SIRIUS-GTH-UZH}\DIFaddendFL , which isolates the \DIFdelbeginFL \DIFdelFL{pseudopotential }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Gaussian-basis }\DIFaddendFL error. \DIFdelbeginFL \DIFdelFL{Right}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{Left}\DIFaddendFL : \DIFdelbeginFL \DIFdelFL{CP2K-GTH-UZH }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{SIRIUS-GTH-UZH }\DIFaddendFL relative to \DIFdelbeginFL \DIFdelFL{SIRIUS-GTH-UZH}\DIFdelendFL \DIFaddbeginFL \DIFaddFL{SIRIUS-FP-LAPW}\DIFaddendFL , which isolates the \DIFdelbeginFL \DIFdelFL{Gaussian-basis }\DIFdelendFL \DIFaddbeginFL \DIFaddFL{pseudopotential }\DIFaddendFL error.}
 \end{figure*}
 
 \subsection{Improved UZH settings}
 
-The classification in Table~\ref{tab:classification} was used to revise the settings in a targeted way. Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. Pseudopotential-limited elements were treated by refitting the GTH parameters with the CP2K ATOM code, including scalar-relativistic atomic reference information and semicore states where appropriate. This targeted route differs from a brute-force convergence exercise: it changes only the component that the error decomposition identifies as limiting.
+The classification in Table~\ref{tab:classification} was used to revise the settings in a targeted way. \DIFaddbegin \DIFadd{Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. }\DIFaddend Pseudopotential-limited elements were treated by refitting the GTH parameters with the CP2K ATOM code, including scalar-relativistic atomic reference information and semicore states where appropriate. \DIFdelbegin \DIFdel{Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. }\DIFdelend This targeted route differs from a brute-force convergence exercise: it changes only the component that the error decomposition identifies as limiting.
 
 Figure~\ref{fig:improved} shows the resulting total error of CP2K-GTH-UZH-new relative to SIRIUS-FP-LAPW and the residual decomposition. The improved settings reduce the dominant outliers of the original protocol and make the remaining discrepancies more interpretable. In particular, noble-gas and Ba errors are reduced by basis-set changes, while the transition-metal cases respond to pseudopotential refitting. The resulting UZH protocol is therefore not a fixed table of parameters but a reproducible recipe for diagnosing, optimizing, and validating CP2K settings.
 
@@ -242,12 +329,12 @@ Figure~\ref{fig:improved} shows the resulting total error of CP2K-GTH-UZH-new re
 \includegraphics[width=0.49\textwidth]{periodic-table-unaries-CP2K-UZH-new-vs-SIRIUS-UZH-epsilon.png}
 \includegraphics[width=0.49\textwidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-UZH-epsilon.png}
 \caption{\label{fig:improved}
-Verification of the improved UZH settings. Top left: total CP2K-GTH-UZH-new error relative to SIRIUS-FP-LAPW. Bottom left: residual CP2K Gaussian-basis error. Top right: residual pseudopotential error after improvement. Bottom right: direct comparison of new and original SIRIUS-GTH-UZH pseudopotential settings.}
+Verification of the improved UZH settings. Top left: total CP2K-GTH-UZH-new error relative to SIRIUS-FP-LAPW. \DIFaddbeginFL \DIFaddFL{Bottom left: residual CP2K Gaussian-basis error. }\DIFaddendFL Top right: residual pseudopotential error after improvement. Bottom \DIFdelbeginFL \DIFdelFL{left: residual CP2K Gaussian-basis error. Bottom }\DIFdelendFL right: direct comparison of new and original SIRIUS-GTH-UZH pseudopotential settings.}
 \end{figure*}
 
 \section{Implications for CP2K verification}
 
-The UZH protocol turns CP2K verification into a diagnostic and constructive workflow. The comparison with SIRIUS-FP-LAPW gives the total accuracy relevant for production calculations. The intermediate SIRIUS-GTH-UZH calculation tells whether the Gaussian basis or the pseudopotential is responsible. The CP2K ATOM code then supplies the internal machinery for improvement: basis optimization with condition-number control, scalar-relativistic atomic references, and GTH parameter fitting. This is particularly valuable for users who need reliable calculations across molecules and solids, because the protocol connects molecular transferability to periodic equation-of-state precision.
+The UZH protocol turns CP2K verification into a diagnostic and constructive workflow. The comparison with SIRIUS-FP-LAPW gives the total accuracy relevant for production calculations. The intermediate SIRIUS-GTH-UZH calculation tells whether the Gaussian basis or the pseudopotential is responsible. The CP2K ATOM code then supplies the internal machinery for improvement: \DIFaddbegin \DIFadd{basis optimization with condition-number control, }\DIFaddend scalar-relativistic atomic references, \DIFaddbegin \DIFadd{and }\DIFaddend GTH parameter fitting\DIFdelbegin \DIFdel{, and basis optimization with condition-number control}\DIFdelend . This is particularly valuable for users who need reliable calculations across molecules and solids, because the protocol connects molecular transferability to periodic equation-of-state precision.
 
 The protocol also clarifies what should be considered converged. Increasing the GPW grid cutoff alone cannot remove a Gaussian-basis error. Likewise, replacing a basis set cannot repair a pseudopotential whose scattering or semicore transferability is insufficient. Conversely, once the SIRIUS-GTH-UZH and SIRIUS-FP-LAPW curves agree, the remaining CP2K discrepancy is a basis issue that can be addressed without changing the pseudopotential. This separation is the practical advantage of combining CP2K and SIRIUS in a single AiiDA-based verification framework.
 

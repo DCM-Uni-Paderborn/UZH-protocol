@@ -1,10 +1,58 @@
 \documentclass[aps,prb,preprint,amsmath,amssymb,superscriptaddress,longbibliography,floatfix]{revtex4-2}
+%DIF LATEXDIFF DIFFERENCE FILE
+%DIF DEL /tmp/SI_prb_tdk_before_basis_order.tex   Tue May 26 22:50:05 2026
+%DIF ADD SI_prb_tdk.tex                           Tue May 26 22:49:19 2026
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{makecell}
+%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
+%DIF CTRADITIONAL PREAMBLE %DIF PREAMBLE
+\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
+\definecolor{TDKgreen}{rgb}{0,0.45,0}
+\RequirePackage[normalem]{ulem} %DIF PREAMBLE
+\RequirePackage[stable]{footmisc} %DIF PREAMBLE
+\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf} %DIF PREAMBLE
+\providecommand{\DIFadd}[1]{{\protect\color{blue} #1}} %DIF PREAMBLE
+\providecommand{\DIFdel}[1]{{\protect\color{red}#1}} %DIF PREAMBLE
+%DIF SAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
+\providecommand{\DIFaddend}{} %DIF PREAMBLE
+\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
+\providecommand{\DIFdelend}{} %DIF PREAMBLE
+\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
+\providecommand{\DIFmodend}{} %DIF PREAMBLE
+%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
+\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
+\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
+\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
+\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
+%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
+\RequirePackage{listings} %DIF PREAMBLE
+\RequirePackage{color} %DIF PREAMBLE
+\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
+%DIF DIFCODE_CTRADITIONAL %DIF PREAMBLE
+  moredelim=[il][\color{red}\scriptsize]{\%DIF\ <\ }, %DIF PREAMBLE
+  moredelim=[il][\color{blue}\sffamily]{\%DIF\ >\ } %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
+	language=DIFcode, %DIF PREAMBLE
+	basicstyle=\ttfamily, %DIF PREAMBLE
+	columns=fullflexible, %DIF PREAMBLE
+	keepspaces=true %DIF PREAMBLE
+} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
+\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
+\lstset{extendedchars=\true,inputencoding=utf8}
+\newcommand{\TDKin}[1]{\textcolor{blue}{#1}}
+\newcommand{\TDKout}[1]{\textcolor{red}{#1}}
+\newcommand{\TDKcomment}[1]{\textcolor{TDKgreen}{\textbf{[TDK:} #1\textbf{]}}}
+
+%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
 
@@ -28,20 +76,26 @@
 \maketitle
 
 \section{Source material and implementation details}
+\TDKcomment{Supplemental terminology was aligned with the basis-before-pseudopotential ordering used in the main text.}
 
-The main text summarizes the protocol, while this Supplemental Material records additional details that are useful for reproduction and for future development of the UZH settings. The organization follows the original molecularly optimized (MOLOPT), Goedecker--Teter--Hutter (GTH), and Hartwigsen--Goedecker--Hutter (HGH) literature~\cite{VandeVondele2007,Goedecker1996,Hartwigsen1998}, the revised MOLOPT benchmarking work~\cite{MullerThesis2024}, the CP2K implementation papers~\cite{CP2K2020,CP2KMadeSimple2026}, and the Automated Interactive Infrastructure and Database for Computational Science (AiiDA) verification protocol and its Supplemental Information~\cite{Huber2021,Bosoni2024}.
+The main text summarizes the protocol, while this Supplemental Material records additional details that are useful for reproduction and for future development of the UZH settings. The organization follows the original \DIFaddbegin \DIFadd{molecularly optimized (MOLOPT), }\DIFaddend Goedecker--Teter--Hutter (GTH), \DIFaddbegin \DIFadd{and }\DIFaddend Hartwigsen--Goedecker--Hutter (HGH) \DIFdelbegin \DIFdel{, and molecularly optimized (MOLOPT) literature~\cite{Goedecker1996,Hartwigsen1998,VandeVondele2007}}\DIFdelend \DIFaddbegin \DIFadd{literature~\cite{VandeVondele2007,Goedecker1996,Hartwigsen1998}}\DIFaddend , the revised MOLOPT benchmarking work~\cite{MullerThesis2024}, the CP2K implementation papers~\cite{CP2K2020,CP2KMadeSimple2026}, and the Automated Interactive Infrastructure and Database for Computational Science (AiiDA) verification protocol and its Supplemental Information~\cite{Huber2021,Bosoni2024}.
 
 \subsection{CP2K ATOM and basis optimization}
 
 The CP2K source tree contains a dedicated ATOM input section for atomic calculations. The relevant run types are energy calculations, basis optimization, and pseudopotential optimization. The ATOM method section supports restricted and unrestricted Kohn-Sham and Hartree-Fock atomic calculations and scalar-relativistic Hamiltonians including zeroth-order regular approximation (ZORA)-type and Douglas--Kroll--Hess variants. The relativistic section allows the order of the Douglas--Kroll--Hess transformation, the transformation strategy, and the ZORA model-potential variant to be selected. The potential section supports all-electron, GTH, unified pseudopotential format (UPF), separable Gaussian pseudopotential (SGP), and effective core potential (ECP) inputs. For the GTH format, the input layer exposes a CP2K-standard GTH potential block, and the print layer can write the optimized potential in CP2K and UPF-like forms.
 
-The CP2K basis optimizer works from template, work, and output basis files. It supports simultaneous fitting of related basis levels and allows the condition number of the overlap matrix to enter the objective. This mirrors the original MOLOPT design: diffuse flexibility is desirable for weak interactions and response properties, but the final basis must remain numerically stable in condensed-phase simulations.
+The \DIFaddbegin \DIFadd{CP2K basis optimizer works from template, work, and output basis files. It supports simultaneous fitting of related basis levels and allows the condition number of the overlap matrix to enter the objective. This mirrors the original MOLOPT design: diffuse flexibility is desirable for weak interactions and response properties, but the final basis must remain numerically stable in condensed-phase simulations.
+}
 
-The pseudopotential optimizer constructs both all-electron and pseudopotential atomic references. Occupations are partitioned into core and valence contributions; semicore choices are therefore explicit in the input and can be changed when the verification workflow reveals poor transferability. The optimizer evaluates the all-electron reference with the selected scalar-relativistic Hamiltonian, constructs the corresponding pseudopotential atom, and fits the compact GTH parameters with a derivative-free Powell algorithm. The fitted target is therefore not an isolated numerical object but a scalar-relativistic atomic mapping from an all-electron reference to the analytic separable GTH form. This machinery is what allows the UZH protocol to improve the pseudopotential component once the SIRIUS-GTH-UZH versus SIRIUS-FP-LAPW comparison identifies a pseudopotential-limited element.
+\DIFadd{The }\DIFaddend pseudopotential optimizer constructs both all-electron and pseudopotential atomic references. Occupations are partitioned into core and valence contributions; semicore choices are therefore explicit in the input and can be changed when the verification workflow reveals poor transferability. The optimizer evaluates the all-electron reference with the selected scalar-relativistic Hamiltonian, constructs the corresponding pseudopotential atom, and fits the compact GTH parameters with a derivative-free Powell algorithm. The fitted target is therefore not an isolated numerical object but a scalar-relativistic atomic mapping from an all-electron reference to the analytic separable GTH form. This machinery is what allows the UZH protocol to improve the pseudopotential component once the SIRIUS-GTH-UZH versus SIRIUS-FP-LAPW comparison identifies a pseudopotential-limited element.
 
-\subsection{SIRIUS calculations}
+\DIFdelbegin \DIFdel{The CP2K basis optimizer works from template, work, and output basis files. It supports simultaneous fitting of related basis levels and allows the condition number of the overlap matrix to enter the objective. This mirrors the original MOLOPT design: diffuse flexibility is desirable for weak interactions and response properties, but the final basis must remain numerically stable in condensed-phase simulations.
+}%DIFDELCMD < 
 
-SIRIUS is used in two complementary modes~\cite{Zhang2022Computation,Zhang2023Sirius,SiriusDocs}. In pseudopotential plane-wave mode, SIRIUS-GTH-UZH uses the same GTH-UZH pseudopotentials as CP2K but removes the localized Gaussian-basis approximation. In all-electron full-potential linearized augmented-plane-wave (FP-LAPW) mode, SIRIUS provides the reference equation of state. The CP2K-GTH-UZH versus SIRIUS-GTH-UZH comparison isolates the CP2K Gaussian-basis error, while the two SIRIUS modes isolate the pseudopotential error.
+%DIFDELCMD < %%%
+\DIFdelend \subsection{SIRIUS calculations}
+
+SIRIUS is used in two complementary modes~\cite{Zhang2022Computation,Zhang2023Sirius,SiriusDocs}. In pseudopotential plane-wave mode, SIRIUS-GTH-UZH uses the same GTH-UZH pseudopotentials as CP2K but removes the localized Gaussian-basis approximation. In all-electron full-potential linearized augmented-plane-wave (FP-LAPW) mode, SIRIUS provides the reference equation of state. The \DIFdelbegin \DIFdel{two SIRIUS modes therefore isolate the pseudopotential error, while the }\DIFdelend CP2K-GTH-UZH versus SIRIUS-GTH-UZH comparison isolates the CP2K Gaussian-basis error\DIFaddbegin \DIFadd{, while the two SIRIUS modes isolate the pseudopotential error}\DIFaddend .
 
 In the FP-LAPW calculation the unit cell is divided into non-overlapping muffin-tin spheres and an interstitial region. Radial functions multiplied by spherical harmonics describe the wave functions inside the spheres, while plane waves describe the interstitial region; local orbitals are used to improve the description of semicore and high-lying states. Because the method is full-potential, the charge density and Kohn-Sham potential are represented without imposing a muffin-tin shape approximation. This all-electron reference is therefore well suited for the present purpose: any difference between SIRIUS-GTH-UZH and SIRIUS-FP-LAPW primarily measures the frozen-core and pseudization error of the GTH-UZH potential, including the quality of semicore and scalar-relativistic transferability.
 
@@ -88,7 +142,7 @@ Representative equation-of-state curves for Ne. Noble gases are sensitive tests 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{Au.pdf}
 \caption{\label{fig:si_au}
-Representative equation-of-state curves for Au, illustrating the behavior of a heavy element where basis completeness and relativistic pseudopotential transferability must both be monitored.}
+Representative equation-of-state curves for Au, illustrating the behavior of a heavy element where \DIFaddbeginFL \DIFaddFL{basis completeness and }\DIFaddendFL relativistic pseudopotential transferability \DIFdelbeginFL \DIFdelFL{and basis completeness }\DIFdelendFL must both be monitored.}
 \end{figure}
 
 \begin{figure}
@@ -106,7 +160,7 @@ The release repository for the UZH protocol is hosted in the DCM-Uni-Paderborn G
 \item SIRIUS-FP-LAPW all-electron workflow inputs and parsed results.
 \item Optimized UZH-MOLOPT basis files and GTH-UZH pseudopotential files.
 \item Scripts used to evaluate the $\varepsilon$ metric and generate the periodic-table maps.
-\item A manifest documenting code versions, basis-file hashes, pseudopotential hashes, and workflow protocol names.
+\item A manifest documenting code versions, \DIFdelbegin \DIFdel{pseudopotential hashes, basis-file }\DIFdelend \DIFaddbegin \DIFadd{basis-file hashes, pseudopotential }\DIFaddend hashes, and workflow protocol names.
 \end{enumerate}
 
 \bibliography{bib_prb_tdk}
