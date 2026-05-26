@@ -62,21 +62,21 @@ Y_{lm}(\hat{\mathbf r}_A) r_A^{l}
 \exp\left(-\alpha_{A l p} r_A^2\right),
 \label{eq:contracted_basis}
 \end{equation}
-with $r_A=|\mathbf r-\mathbf R_A|$, where $m=-l,\ldots,l$ is the magnetic quantum number and $\nu$ labels contractions that share a compact primitive exponent set $\{\alpha_{A l p}\}$ and differ through the coefficients $c_{A l\nu p}$. Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
+with $r_A=|\mathbf r-\mathbf R_A|$ and $\hat{\mathbf r}_A=(\mathbf r-\mathbf R_A)/r_A$, where $Y_{lm}$ is a spherical harmonic, $m=-l,\ldots,l$ is the magnetic quantum number, $p=1,\ldots,N_{Al}$ enumerates primitive Gaussians in angular-momentum channel $l$, $\alpha_{A l p}$ are primitive exponents, and $\nu$ labels contractions that differ through the coefficients $c_{A l\nu p}$. Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
 
 The numerical stability of a candidate basis is measured with the molecular overlap matrix
 \begin{equation}
 S_{\mu\nu}^{(M)} =\langle \chi_\mu|\chi_\nu\rangle_M 
 \label{eq:overlap}
 \end{equation}
-and, for basis level $B$, its condition number 
+where the composite indices $\mu$ and $\nu$ enumerate contracted basis functions of molecule $M$. For basis level $B$, the condition number is
 \begin{equation}
 \kappa_B(M)=
 \frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}
 {\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
 \label{eq:condition}
 \end{equation}
-where $M$ denotes the molecule. The MOLOPT optimization target balances accuracy and numerical stability, i.e.
+where $S_B^{(M)}$ is the overlap matrix for basis level $B$, and $\lambda_{\max}$ and $\lambda_{\min}$ denote its largest and smallest eigenvalues. The MOLOPT optimization target balances accuracy and numerical stability, i.e.
 \begin{equation}
 \Omega =
 \sum_{B\in\mathcal B}\sum_{M\in\mathcal T}
@@ -89,7 +89,7 @@ where $M$ denotes the molecule. The MOLOPT optimization target balances accuracy
 \right],
 \label{eq:molopt}
 \end{equation}
-where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molecular training set, and $\mathcal Q$ contains the energy and property targets used during calibration. The scale factors $s_q$ make heterogeneous quantities comparable, and the weights $w_q$ control their relative importance. The logarithmic condition-number term is essential: diffuse primitives improve weak interactions and response properties, but unconstrained diffuse functions can create near-linear dependencies. In the MOLOPT construction, diffuse primitives are included within contractions, providing flexibility without making the overlap matrix numerically fragile.
+where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molecular training set, and $\mathcal Q$ contains the energy and property targets used during calibration. The quantity $q_{B,M}$ is the value obtained with basis level $B$ for molecule $M$, $q_M^{\mathrm{ref}}$ is the corresponding reference value, the scale factors $s_q$ make heterogeneous quantities comparable, the weights $w_q$ control their relative importance, and $\gamma$ weights the condition-number penalty. The logarithmic condition-number term is essential: diffuse primitives improve weak interactions and response properties, but unconstrained diffuse functions can create near-linear dependencies. In the MOLOPT construction, diffuse primitives are included within contractions, providing flexibility without making the overlap matrix numerically fragile.
 
 Two aspects of this construction are important for the UZH protocol. The primitive exponents determine the radial completeness of each angular-momentum channel, whereas the contraction coefficients define compact functions that retain the flexibility needed for valence and polarization response. The condition-number penalty prevents an apparently improved molecular fit from becoming numerically unstable in condensed-phase GPW calculations. Thus, the basis optimization is not merely an enlargement of the basis; it is a constrained optimization of a transferable basis-set parameter set.
 
@@ -105,19 +105,20 @@ V_{\mathrm{loc}}^{\mathrm{pp}}(r) =
 \left(\sqrt{2}\alpha^{\mathrm{pp}} r\right)^{2i-2} \\
 \times \exp\left[-\left(\alpha^{\mathrm{pp}} r\right)^2\right],
 \end{multline}
-with $\alpha^{\mathrm{pp}}=1/(\sqrt{2}r_{\mathrm{loc}}^{\mathrm{pp}})$, and the nonlocal part is written as
+with $\alpha^{\mathrm{pp}}=1/(\sqrt{2}r_{\mathrm{loc}}^{\mathrm{pp}})$, where $r_{\mathrm{loc}}^{\mathrm{pp}}$ is the local pseudopotential radius. Here $r$ is the electron--nucleus distance, $Z_{\mathrm{ion}}$ is the ionic charge, $i=1,\ldots,4$ enumerates the local Gaussian terms, and $C_i^{\mathrm{pp}}$ are their coefficients. The nonlocal part is written as
 \begin{equation}
 V_{\mathrm{nl}}^{\mathrm{pp}}(\mathbf r,\mathbf r')
 =\sum_{lm}\sum_{ij}
 \langle \mathbf r|p_i^{lm}\rangle h_{ij}^{l}
 \langle p_j^{lm}|\mathbf r'\rangle .
 \end{equation}
-The projectors have Gaussian radial factors,
+where $l$ and $m$ are angular-momentum and magnetic quantum numbers, $i$ and $j$ enumerate nonlocal projectors in a given $l$ channel, $p_i^{lm}$ are projector functions, and $h_{ij}^{l}$ is the channel coupling matrix. The projectors have Gaussian radial factors,
 \begin{equation}
 \langle \mathbf r|p_i^{lm}\rangle =
 N_i^{l}Y^{lm}(\hat r) r^{l+2i-2}
 \exp\left[-\frac{1}{2}\left(\frac{r}{r_l}\right)^2\right].
 \end{equation}
+Here $N_i^l$ is the projector normalization constant, $Y^{lm}$ is the corresponding spherical harmonic, $\hat r=\mathbf r/r$, and $r_l$ is the nonlocal projector radius for channel $l$.
 The nonlocal expression above is a Kleinman--Bylander-type separable representation~\cite{Kleinman1982}: each angular-momentum channel is represented by a small set of localized projectors and a low-dimensional coupling matrix $h_{ij}^{l}$ rather than by a fully semilocal radial operator. This form makes the pseudopotential inexpensive to apply in large GPW calculations and directly usable in a plane-wave representation. Norm conservation requires the pseudo-valence states to reproduce the all-electron valence norm and scattering properties outside the core region for each angular-momentum channel. Together with the use of more than one projector per channel, this constraint improves transferability across different bonding environments. The Gaussian radial factors are central to the dual-space construction because they lead to analytic Fourier transforms, so the same GTH parameter set can be evaluated consistently in CP2K/Quickstep and in SIRIUS.
 
 This representation is well suited to GPW calculations because it can be evaluated efficiently with Gaussian orbitals and on real-space grids, while also being compatible with plane-wave calculations. The relativistic HGH generalization extends the construction across the periodic table and retains the separable analytic structure~\cite{Hartwigsen1998}. In the UZH protocol, the GTH form is optimized with CP2K's ATOM program against scalar-relativistic atomic reference calculations, including valence and semicore information as needed.
@@ -148,7 +149,7 @@ The first term measures the CP2K Gaussian-basis error for a fixed pseudopotentia
 \sum_i\left[E_b(V_i)-\langle E_b\rangle\right]^2}}},
 \label{eq:epsilon}
 \end{equation}
-where the volumes $V_i$ are sampled around the equilibrium region. This dimensionless metric is sensitive to equation-of-state differences while remaining comparable across chemically distinct elements.
+where $a$ and $b$ label the two methods being compared, $i$ runs over the volume grid, the volumes $V_i$ are sampled around the equilibrium region, and $\langle E_a\rangle$ and $\langle E_b\rangle$ are the corresponding mean energies over that grid. This dimensionless metric is sensitive to equation-of-state differences while remaining comparable across chemically distinct elements.
 
 \begin{figure}
 \includegraphics[width=\linewidth]{comparison_b.png}
@@ -172,7 +173,7 @@ The relativistic treatment was kept consistent with the scalar-relativistic GTH/
 
 \subsection{CP2K ATOM and closed-loop optimization}
 
-The optimization loop uses CP2K's ATOM code. Inspection of the CP2K source and input reference shows that the ATOM input layer supports energy calculations, basis optimization, and pseudopotential optimization as distinct run types; scalar-relativistic atomic reference calculations can be generated with zeroth-order regular approximation (ZORA)-type and Douglas--Kroll--Hess Hamiltonians; and GTH pseudopotentials can be read, printed, fitted, and exported~\cite{CP2K2020,CP2KMadeSimple2026}. The basis optimizer uses template, work, and output basis files and allows the condition number of the overlap matrix to enter the training objective. The pseudopotential optimizer constructs all-electron and pseudopotential atomic references with explicit core, valence, and semicore occupations, evaluates orbital energies and radial charges, and uses a Powell-type derivative-free optimization to fit the compact GTH parameter set~\cite{Powell1964}. These implementation details are important because they make CP2K not merely the code under test, but also the code that can generate revised scalar-relativistic basis and pseudopotential libraries after the error decomposition has identified the limiting approximation.
+The optimization loop uses CP2K's ATOM code. Inspection of the CP2K source and input reference shows that the ATOM input layer supports energy calculations, basis optimization, and pseudopotential optimization as distinct run types; scalar-relativistic atomic reference calculations can be generated with zeroth-order regular approximation (ZORA)-type and Douglas--Kroll--Hess Hamiltonians; and GTH pseudopotentials can be read, printed, fitted, and exported~\cite{CP2K2020,CP2KMadeSimple2026}. The basis optimizer uses template, work, and output basis files and allows the condition number of the overlap matrix to enter the training objective. The pseudopotential optimizer constructs all-electron and pseudopotential atomic references with explicit core, valence, and semicore occupations, evaluates orbital energies and radial charges, and uses a Powell-type derivative-free optimization to fit the compact GTH parameter set~\cite{Powell1964}. These implementation details are important because they make CP2K not merely the code under test, but also the code that can generate revised scalar-relativistic basis and pseudopotential parameter files after the error decomposition has identified the limiting approximation.
 
 \section{Results and discussion}
 
