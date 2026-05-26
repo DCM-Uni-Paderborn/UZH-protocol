@@ -102,16 +102,15 @@ The decomposition is simple but powerful. CP2K-GTH-UZH and SIRIUS-GTH-UZH differ
 \subsection{MOLOPT basis sets}
 
 MOLOPT basis sets are generally contracted Gaussian basis sets designed for density-functional calculations in gas and condensed phases~\cite{VandeVondele2007}. For atom $A$, a contracted basis function in angular-momentum channel $l$ can be written as
-\begin{align}
+\begin{equation}
 \chi_{A l m \nu}(\mathbf r)
-&=
+=
 Y_{lm}(\hat{\mathbf r}_A) r_A^{l}
 \sum_{p=1}^{N_{Al}} c_{A l\nu p}
 \exp\left(-\alpha_{A l p} r_A^2\right),
-\label{eq:contracted_basis}\\
-r_A&=|\mathbf r-\mathbf R_A| ,
-\end{align}
-where $\nu$ labels contractions that share a compact primitive exponent set $\{\alpha_{A l p}\}$ and differ through the coefficients $c_{A l\nu p}$. Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
+\label{eq:contracted_basis}
+\end{equation}
+\TDKout{where $\nu$ labels contractions that share a compact primitive exponent set $\{\alpha_{A l p}\}$ and differ through the coefficients $c_{A l\nu p}$.}\TDKin{with $r_A=|\mathbf r-\mathbf R_A|$, where $m=-l,\ldots,l$ is the magnetic quantum number and $\nu$ labels contractions that share a compact primitive exponent set $\{\alpha_{A l p}\}$ and differ through the coefficients $c_{A l\nu p}$.} Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
 
 The numerical stability of a candidate basis is measured with the molecular overlap matrix,
 \begin{equation}
