@@ -95,45 +95,11 @@ This issue is particularly important for CP2K/Quickstep~\cite{CP2K2020,CP2KMadeS
 
 Here we formulate and apply what we call the UZH protocol. The protocol combines molecularly optimized (MOLOPT) basis sets~\cite{VandeVondele2007} with the analytic Goedecker--Teter--Hutter (GTH) family of separable dual-space Gaussian pseudopotentials and its Hartwigsen--Goedecker--Hutter (HGH) relativistic extension~\cite{Goedecker1996,Hartwigsen1998,Krack2005}. Its central idea is to close a loop between molecular calibration and solid-state verification. In the first step, the Gaussian basis is optimized and calibrated against small molecules, following the MOLOPT philosophy of minimizing both energy errors and ill-conditioning of the overlap matrix~\cite{VandeVondele2007}. In the second step, the resulting CP2K settings are tested in the reproducible unary-crystal workflow of the Automated Interactive Infrastructure and Database for Computational Science (AiiDA) common workflows~\cite{Huber2021,Bosoni2024}. In the third step, the total CP2K error is decomposed by using SIRIUS both with the same GTH-UZH pseudopotentials and as a full-potential linearized augmented-plane-wave (FP-LAPW) reference~\cite{Zhang2022Computation,Zhang2023Sirius,SiriusDocs}.
 
-The decomposition is simple but powerful. CP2K-GTH-UZH and SIRIUS-GTH-UZH differ in the orbital representation while keeping the same pseudopotential fixed; their difference isolates the Gaussian-basis component. SIRIUS-GTH-UZH and SIRIUS-FP-LAPW share the same code infrastructure but differ in the core-electron approximation; their difference isolates the pseudopotential component. The comparison of CP2K-GTH-UZH with SIRIUS-FP-LAPW gives the total practical error of the UZH protocol. Because CP2K also contains the ATOM machinery for basis-set optimization, scalar-relativistic atomic calculations, and GTH pseudopotential fitting, the same framework can diagnose and then improve \TDKout{the underlying numerical libraries}\TDKin{the associated basis-set and pseudopotential parameter files}.
+The decomposition is simple but powerful. CP2K-GTH-UZH and SIRIUS-GTH-UZH differ in the orbital representation while keeping the same pseudopotential fixed; their difference isolates the Gaussian-basis component. SIRIUS-GTH-UZH and SIRIUS-FP-LAPW share the same code infrastructure but differ in the core-electron approximation; their difference isolates the pseudopotential component. The comparison of CP2K-GTH-UZH with SIRIUS-FP-LAPW gives the total practical error of the UZH protocol. Because CP2K also contains the ATOM machinery for basis-set optimization, scalar-relativistic atomic calculations, and GTH pseudopotential fitting, the same framework can diagnose and then improve the associated basis-set and pseudopotential parameter files.
 
 \section{Theory and protocol}
-\TDKcomment{The theory section and the terminology below were normalized to discuss basis-set effects before pseudopotential effects.}
 
-\DIFdelbegin \subsection{\DIFdel{Separable dual-space Gaussian pseudopotentials}}
-%DIFAUXCMD
-\addtocounter{subsection}{-1}%DIFAUXCMD
-%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{The GTH and HGH pseudopotentials are norm-conserving, angular-momentum-dependent pseudopotentials written in an analytic form that is compact in both real and reciprocal space~\cite{Goedecker1996,Hartwigsen1998}. Their local part is
-}\begin{multline*}
-\DIFdel{V_{\mathrm{loc}}^{\mathrm{pp}}(r) =
--\frac{Z_{\mathrm{ion}}}{r}\operatorname{erf}\left(\alpha^{\mathrm{pp}} r\right)
-+ \sum_{i=1}^{4} C_i^{\mathrm{pp}}
-\left(\sqrt{2}\alpha^{\mathrm{pp}} r\right)^{2i-2} }\\
-\DIFdel{\times \exp\left[-\left(\alpha^{\mathrm{pp}} r\right)^2\right],
-\qquad
-\alpha^{\mathrm{pp}}=\frac{1}{\sqrt{2}r_{\mathrm{loc}}^{\mathrm{pp}}},
-}\end{multline*}%DIFAUXCMD
-\DIFdel{and the nonlocal part is written as
-}\begin{displaymath}
-\DIFdel{V_{\mathrm{nl}}^{\mathrm{pp}}(\mathbf r,\mathbf r')
-=\sum_{lm}\sum_{ij}
-\langle \mathbf r|p_i^{lm}\rangle h_{ij}^{l}
-\langle p_j^{lm}|\mathbf r'\rangle .
-}\end{displaymath}%DIFAUXCMD
-\DIFdel{The projectors have Gaussian radial factors,
-}\begin{displaymath}
-\DIFdel{\langle \mathbf r|p_i^{lm}\rangle =
-N_i^{l}Y^{lm}(\hat r) r^{l+2i-2}
-\exp\left[-\frac{1}{2}\left(\frac{r}{r_l}\right)^2\right].
-}\end{displaymath}%DIFAUXCMD
-\DIFdel{This representation is well suited to GPW calculations because it can be evaluated efficiently with Gaussian orbitals and on real-space grids, while also being compatible with plane-wave calculations. The relativistic HGH generalization extends the construction across the periodic table and retains the separable analytic structure~\cite{Hartwigsen1998}. In the UZH protocol, the GTH form is optimized with CP2K's ATOM program against scalar-relativistic atomic reference calculations, including valence and semicore information as needed.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdelend \subsection{MOLOPT basis sets}
+\subsection{MOLOPT basis sets}
 
 MOLOPT basis sets are generally contracted Gaussian basis sets designed for density-functional calculations in gas and condensed phases~\cite{VandeVondele2007}. For atom $A$, a contracted basis function in angular-momentum channel $l$ can be written as
 \begin{align}
@@ -152,7 +118,8 @@ The numerical stability of a candidate basis is measured with the molecular over
 S_{\mu\nu}^{(M)}=\langle \chi_\mu|\chi_\nu\rangle_M,
 \qquad
 \kappa_B(M)=
-\frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}{\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
+\frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}
+{\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
 \label{eq:overlap_condition}
 \end{equation}
 where $\kappa_B(M)$ is the condition number for basis level $B$ and molecule $M$. The MOLOPT optimization target balances accuracy and numerical stability,
@@ -172,35 +139,34 @@ where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molec
 
 The UZH basis optimization follows this logic but makes the calibration explicit. Small molecules are used first because they probe chemically diverse bonding situations at modest cost, permit comparison to all-electron Gaussian references, and expose failures in geometries, dipoles, polarizabilities, and vibrational frequencies before the settings are transferred to solids. This molecular stage is not the final validation target; rather, it establishes a chemically balanced basis library that can then be assessed in a reproducible periodic workflow.
 
-\DIFaddbegin \subsection{\DIFadd{Separable dual-space Gaussian pseudopotentials}}
+\subsection{Separable dual-space Gaussian pseudopotentials}
 
-\DIFadd{The GTH and HGH pseudopotentials are norm-conserving, angular-momentum-dependent pseudopotentials written in an analytic form that is compact in both real and reciprocal space~\cite{Goedecker1996,Hartwigsen1998}. Their local part is
-}\begin{multline}
-\DIFadd{V_{\mathrm{loc}}^{\mathrm{pp}}(r) =
+The GTH and HGH pseudopotentials are norm-conserving, angular-momentum-dependent pseudopotentials written in an analytic form that is compact in both real and reciprocal space~\cite{Goedecker1996,Hartwigsen1998}. Their local part is
+\begin{multline}
+V_{\mathrm{loc}}^{\mathrm{pp}}(r) =
 -\frac{Z_{\mathrm{ion}}}{r}\operatorname{erf}\left(\alpha^{\mathrm{pp}} r\right)
 + \sum_{i=1}^{4} C_i^{\mathrm{pp}}
-\left(\sqrt{2}\alpha^{\mathrm{pp}} r\right)^{2i-2} }\\
-\DIFadd{\times \exp\left[-\left(\alpha^{\mathrm{pp}} r\right)^2\right],
+\left(\sqrt{2}\alpha^{\mathrm{pp}} r\right)^{2i-2} \\
+\times \exp\left[-\left(\alpha^{\mathrm{pp}} r\right)^2\right],
 \qquad
 \alpha^{\mathrm{pp}}=\frac{1}{\sqrt{2}r_{\mathrm{loc}}^{\mathrm{pp}}},
-}\end{multline}
-\DIFadd{and the nonlocal part is written as
-}\begin{equation}
-\DIFadd{V_{\mathrm{nl}}^{\mathrm{pp}}(\mathbf r,\mathbf r')
+\end{multline}
+and the nonlocal part is written as
+\begin{equation}
+V_{\mathrm{nl}}^{\mathrm{pp}}(\mathbf r,\mathbf r')
 =\sum_{lm}\sum_{ij}
 \langle \mathbf r|p_i^{lm}\rangle h_{ij}^{l}
 \langle p_j^{lm}|\mathbf r'\rangle .
-}\end{equation}
-\DIFadd{The projectors have Gaussian radial factors,
-}\begin{equation}
-\DIFadd{\langle \mathbf r|p_i^{lm}\rangle =
+\end{equation}
+The projectors have Gaussian radial factors,
+\begin{equation}
+\langle \mathbf r|p_i^{lm}\rangle =
 N_i^{l}Y^{lm}(\hat r) r^{l+2i-2}
 \exp\left[-\frac{1}{2}\left(\frac{r}{r_l}\right)^2\right].
-}\end{equation}
-\DIFadd{This representation is well suited to GPW calculations because it can be evaluated efficiently with Gaussian orbitals and on real-space grids, while also being compatible with plane-wave calculations. The relativistic HGH generalization extends the construction across the periodic table and retains the separable analytic structure~\cite{Hartwigsen1998}. In the UZH protocol, the GTH form is optimized with CP2K's ATOM program against scalar-relativistic atomic reference calculations, including valence and semicore information as needed.
-}
+\end{equation}
+This representation is well suited to GPW calculations because it can be evaluated efficiently with Gaussian orbitals and on real-space grids, while also being compatible with plane-wave calculations. The relativistic HGH generalization extends the construction across the periodic table and retains the separable analytic structure~\cite{Hartwigsen1998}. In the UZH protocol, the GTH form is optimized with CP2K's ATOM program against scalar-relativistic atomic reference calculations, including valence and semicore information as needed.
 
-\DIFaddend \subsection{Error decomposition}
+\subsection{Error decomposition}
 
 Let $E_{\mathrm{C}}^{\mathrm{GTH}}(V)$ denote CP2K-GTH-UZH energies, $E_{\mathrm{S}}^{\mathrm{GTH}}(V)$ SIRIUS-GTH-UZH energies, and $E_{\mathrm{S}}^{\mathrm{AE}}(V)$ SIRIUS-FP-LAPW all-electron (AE) energies for the same structure and volume. The total deviation of the practical CP2K protocol is
 \begin{equation}
