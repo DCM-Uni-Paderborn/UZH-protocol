@@ -64,16 +64,19 @@ Y_{lm}(\hat{\mathbf r}_A) r_A^{l}
 \end{equation}
 with $r_A=|\mathbf r-\mathbf R_A|$, where $m=-l,\ldots,l$ is the magnetic quantum number and $\nu$ labels contractions that share a compact primitive exponent set $\{\alpha_{A l p}\}$ and differ through the coefficients $c_{A l\nu p}$. Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
 
-The numerical stability of a candidate basis is measured with the molecular overlap matrix $S_{\mu\nu}^{(M)}$ and, for basis level $B$, its condition number $\kappa_B(M)$,
+The numerical stability of a candidate basis is measured with the molecular overlap matrix
 \begin{equation}
-S_{\mu\nu}^{(M)}=\langle \chi_\mu|\chi_\nu\rangle_M,
-\qquad
+S_{\mu\nu}^{(M)} =\langle \chi_\mu|\chi_\nu\rangle_M 
+\label{eq:overlap}
+\end{equation}
+and, for basis level $B$, its condition number 
+\begin{equation}
 \kappa_B(M)=
 \frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}
 {\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
-\label{eq:overlap_condition}
+\label{eq:condition}
 \end{equation}
-where $M$ denotes the molecule. The MOLOPT optimization target balances accuracy and numerical stability, i.e.,
+where $M$ denotes the molecule. The MOLOPT optimization target balances accuracy and numerical stability, i.e.
 \begin{equation}
 \Omega =
 \sum_{B\in\mathcal B}\sum_{M\in\mathcal T}
@@ -88,7 +91,7 @@ where $M$ denotes the molecule. The MOLOPT optimization target balances accuracy
 \end{equation}
 where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molecular training set, and $\mathcal Q$ contains the energy and property targets used during calibration. The scale factors $s_q$ make heterogeneous quantities comparable, and the weights $w_q$ control their relative importance. The logarithmic condition-number term is essential: diffuse primitives improve weak interactions and response properties, but unconstrained diffuse functions can create near-linear dependencies. In the MOLOPT construction, diffuse primitives are included within contractions, providing flexibility without making the overlap matrix numerically fragile.
 
-The UZH basis optimization follows this logic but makes the calibration explicit. Small molecules are used first because they probe chemically diverse bonding situations at modest cost, permit comparison to all-electron Gaussian references, and expose failures in geometries, dipoles, polarizabilities, and vibrational frequencies before the settings are transferred to solids. This molecular stage is not the final validation target; rather, it establishes a chemically balanced basis library that can then be assessed in a reproducible periodic workflow.
+The UZH basis optimization follows this logic but makes the calibration explicit. Small molecules are used first because they probe chemically diverse bonding situations at modest cost, permit comparison to all-electron Gaussian references, and expose failures in geometries, dipoles, polarizabilities, and vibrational frequencies before the settings are transferred to solids. This molecular stage is not the final validation target; rather, it establishes a chemically balanced basis set that can then be assessed in a reproducible periodic workflow.
 
 \subsection{Separable dual-space Gaussian pseudopotentials}
 
