@@ -110,21 +110,21 @@ Y_{lm}(\hat{\mathbf r}_A) r_A^{l}
 \exp\left(-\alpha_{A l p} r_A^2\right),
 \label{eq:contracted_basis}
 \end{equation}
-\TDKout{with $r_A=|\mathbf r-\mathbf R_A|$, where $m=-l,\ldots,l$ is the magnetic quantum number and $\nu$ labels contractions that share a compact primitive exponent set $\{\alpha_{A l p}\}$ and differ through the coefficients $c_{A l\nu p}$.}\TDKin{with $r_A=|\mathbf r-\mathbf R_A|$ and $\hat{\mathbf r}_A=(\mathbf r-\mathbf R_A)/r_A$, where $Y_{lm}$ is a spherical harmonic, $m=-l,\ldots,l$ is the magnetic quantum number, $p=1,\ldots,N_{Al}$ enumerates primitive Gaussians in angular-momentum channel $l$, $\alpha_{A l p}$ are primitive exponents, and $\nu$ labels contractions that differ through the coefficients $c_{A l\nu p}$.} Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
+with $r_A=|\mathbf r-\mathbf R_A|$ and $\hat{\mathbf r}_A=(\mathbf r-\mathbf R_A)/r_A$, where $Y_{lm}$ is a spherical harmonic, $m=-l,\ldots,l$ is the magnetic quantum number, $p=1,\ldots,N_{Al}$ enumerates primitive Gaussians in angular-momentum channel $l$, $\alpha_{A l p}$ are primitive exponents, and $\nu$ labels contractions that differ through the coefficients $c_{A l\nu p}$. Valence and polarization flexibility are therefore introduced mainly through the contraction pattern, while the same primitive pool can be kept sufficiently compact for condensed-phase calculations.
 
 The numerical stability of a candidate basis is measured with the molecular overlap matrix
 \begin{equation}
 S_{\mu\nu}^{(M)} =\langle \chi_\mu|\chi_\nu\rangle_M 
 \label{eq:overlap}
 \end{equation}
-\TDKout{and, for basis level $B$, its condition number}\TDKin{where the composite indices $\mu$ and $\nu$ enumerate contracted basis functions of molecule $M$. For basis level $B$, the condition number is}
+where the composite indices $\mu$ and $\nu$ enumerate contracted basis functions of molecule $M$. For basis level $B$, the condition number is
 \begin{equation}
 \kappa_B(M)=
 \frac{\lambda_{\max}\!\left[S_B^{(M)}\right]}
 {\lambda_{\min}\!\left[S_B^{(M)}\right]} ,
 \label{eq:condition}
 \end{equation}
-\TDKout{where $M$ denotes the molecule.}\TDKin{where $S_B^{(M)}$ is the overlap matrix for basis level $B$, and $\lambda_{\max}$ and $\lambda_{\min}$ denote its largest and smallest eigenvalues.} The MOLOPT optimization target balances accuracy and numerical stability, i.e.
+where $S_B^{(M)}$ is the overlap matrix for basis level $B$, and $\lambda_{\max}$ and $\lambda_{\min}$ denote its largest and smallest eigenvalues. The MOLOPT optimization target balances accuracy and numerical stability, i.e.
 \begin{equation}
 \Omega =
 \sum_{B\in\mathcal B}\sum_{M\in\mathcal T}
@@ -137,7 +137,7 @@ S_{\mu\nu}^{(M)} =\langle \chi_\mu|\chi_\nu\rangle_M
 \right],
 \label{eq:molopt}
 \end{equation}
-where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molecular training set, and $\mathcal Q$ contains the energy and property targets used during calibration. \TDKout{The scale factors $s_q$ make heterogeneous quantities comparable, and the weights $w_q$ control their relative importance.}\TDKin{The quantity $q_{B,M}$ is the value obtained with basis level $B$ for molecule $M$, $q_M^{\mathrm{ref}}$ is the corresponding reference value, the scale factors $s_q$ make heterogeneous quantities comparable, the weights $w_q$ control their relative importance, and $\gamma$ weights the condition-number penalty.} The logarithmic condition-number term is essential: diffuse primitives improve weak interactions and response properties, but unconstrained diffuse functions can create near-linear dependencies. In the MOLOPT construction, diffuse primitives are included within contractions, providing flexibility without making the overlap matrix numerically fragile.
+where $\mathcal B$ is the set of related basis levels, $\mathcal T$ is the molecular training set, and $\mathcal Q$ contains the energy and property targets used during calibration. The quantity $q_{B,M}$ is the value obtained with basis level $B$ for molecule $M$, $q_M^{\mathrm{ref}}$ is the corresponding reference value, the scale factors $s_q$ make heterogeneous quantities comparable, the weights $w_q$ control their relative importance, and $\gamma$ weights the condition-number penalty. The logarithmic condition-number term is essential: diffuse primitives improve weak interactions and response properties, but unconstrained diffuse functions can create near-linear dependencies. In the MOLOPT construction, diffuse primitives are included within contractions, providing flexibility without making the overlap matrix numerically fragile.
 
 Two aspects of this construction are important for the UZH protocol. The primitive exponents determine the radial completeness of each angular-momentum channel, whereas the contraction coefficients define compact functions that retain the flexibility needed for valence and polarization response. The condition-number penalty prevents an apparently improved molecular fit from becoming numerically unstable in condensed-phase GPW calculations. Thus, the basis optimization is not merely an enlargement of the basis; it is a constrained optimization of a transferable basis-set parameter set.
 
