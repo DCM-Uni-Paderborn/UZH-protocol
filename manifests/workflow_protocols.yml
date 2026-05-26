@@ -1,0 +1,28 @@
+periodic_verification:
+  structures:
+    - face-centered cubic
+    - body-centered cubic
+    - simple cubic
+    - diamond
+  volume_grid:
+    points: 7
+    range: 94-106 percent around the reference volume
+  equation_of_state: Birch-Murnaghan
+  comparisons:
+    total_error: CP2K-GTH-UZH vs SIRIUS-FP-LAPW
+    basis_error: CP2K-GTH-UZH vs SIRIUS-GTH-UZH
+    pseudopotential_error: SIRIUS-GTH-UZH vs SIRIUS-FP-LAPW
+
+molecular_calibration:
+  properties:
+    - bond lengths
+    - bond angles
+    - dihedral angles
+    - dipole moments
+    - polarizabilities
+    - vibrational frequencies
+  basis_sequence:
+    - DZVP
+    - TZVP
+    - TZV2P
+

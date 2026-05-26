@@ -1,0 +1,114 @@
+\documentclass[aps,prb,preprint,amsmath,amssymb,superscriptaddress,longbibliography,floatfix]{revtex4-2}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+
+\begin{document}
+
+\title{Supplemental Material for ``The UZH protocol: Separating and reducing Gaussian-basis and pseudopotential errors in CP2K''}
+
+\author{Hossein Mirhosseini}
+\affiliation{Center for Advanced Systems Understanding (CASUS), Conrad-Schiedt-Stra{\ss}e 20, 02826 G\"orlitz, Germany}
+\affiliation{Helmholtz-Zentrum Dresden-Rossendorf, Bautzner Landstra{\ss}e 400, 01328 Dresden, Germany}
+\author{Tiziano M. A. M\"uller}
+\affiliation{Department of Chemistry, University of Zurich, CH-8057 Zurich, Switzerland}
+\author{Matthias Krack}
+\affiliation{Paul Scherrer Institute, 5232 Villigen PSI, Switzerland}
+\author{Thomas D. K\"uhne}
+\email{tkuehne@cp2k.org}
+\affiliation{Center for Advanced Systems Understanding (CASUS), Conrad-Schiedt-Stra{\ss}e 20, 02826 G\"orlitz, Germany}
+\affiliation{Helmholtz-Zentrum Dresden-Rossendorf, Bautzner Landstra{\ss}e 400, 01328 Dresden, Germany}
+\affiliation{Institute of Artificial Intelligence, Technische Universit\"at Dresden, Helmholtzstra{\ss}e 10, 01069 Dresden, Germany}
+\author{J\"urg Hutter}
+\affiliation{Department of Chemistry, University of Zurich, CH-8057 Zurich, Switzerland}
+
+\maketitle
+
+\section{Source material and implementation details}
+
+The main text summarizes the protocol, while this Supplemental Material records additional details that are useful for reproduction and for future development of the UZH settings. The organization follows the original Goedecker--Teter--Hutter (GTH), Hartwigsen--Goedecker--Hutter (HGH), and molecularly optimized (MOLOPT) literature~\cite{Goedecker1996,Hartwigsen1998,VandeVondele2007}, the revised MOLOPT benchmarking work~\cite{MullerThesis2024}, the CP2K implementation papers~\cite{CP2K2020,CP2KMadeSimple2026}, and the Automated Interactive Infrastructure and Database for Computational Science (AiiDA) verification protocol and its Supplemental Information~\cite{Huber2021,Bosoni2024}.
+
+\subsection{CP2K ATOM and basis optimization}
+
+The CP2K source tree contains a dedicated ATOM input section for atomic calculations. The relevant run types are energy calculations, basis optimization, and pseudopotential optimization. The ATOM method section supports restricted and unrestricted Kohn-Sham and Hartree-Fock atomic calculations and scalar-relativistic Hamiltonians including zeroth-order regular approximation (ZORA)-type and Douglas--Kroll--Hess variants. The relativistic section allows the order of the Douglas--Kroll--Hess transformation, the transformation strategy, and the ZORA model-potential variant to be selected. The potential section supports all-electron, GTH, unified pseudopotential format (UPF), separable Gaussian pseudopotential (SGP), and effective core potential (ECP) inputs. For the GTH format, the input layer exposes a CP2K-standard GTH potential block, and the print layer can write the optimized potential in CP2K and UPF-like forms.
+
+The pseudopotential optimizer constructs both all-electron and pseudopotential atomic references. Occupations are partitioned into core and valence contributions; semicore choices are therefore explicit in the input and can be changed when the verification workflow reveals poor transferability. The optimizer evaluates the all-electron reference with the selected scalar-relativistic Hamiltonian, constructs the corresponding pseudopotential atom, and fits the compact GTH parameters with a derivative-free Powell algorithm. The fitted target is therefore not an isolated numerical object but a scalar-relativistic atomic mapping from an all-electron reference to the analytic separable GTH form. This machinery is what allows the UZH protocol to improve the pseudopotential component once the SIRIUS-GTH-UZH versus SIRIUS-FP-LAPW comparison identifies a pseudopotential-limited element.
+
+The CP2K basis optimizer works from template, work, and output basis files. It supports simultaneous fitting of related basis levels and allows the condition number of the overlap matrix to enter the objective. This mirrors the original MOLOPT design: diffuse flexibility is desirable for weak interactions and response properties, but the final basis must remain numerically stable in condensed-phase simulations.
+
+\subsection{SIRIUS calculations}
+
+SIRIUS is used in two complementary modes~\cite{Zhang2022Computation,Zhang2023Sirius,SiriusDocs}. In pseudopotential plane-wave mode, SIRIUS-GTH-UZH uses the same GTH-UZH pseudopotentials as CP2K but removes the localized Gaussian-basis approximation. In all-electron full-potential linearized augmented-plane-wave (FP-LAPW) mode, SIRIUS provides the reference equation of state. The two SIRIUS modes therefore isolate the pseudopotential error, while the CP2K-GTH-UZH versus SIRIUS-GTH-UZH comparison isolates the CP2K Gaussian-basis error.
+
+In the FP-LAPW calculation the unit cell is divided into non-overlapping muffin-tin spheres and an interstitial region. Radial functions multiplied by spherical harmonics describe the wave functions inside the spheres, while plane waves describe the interstitial region; local orbitals are used to improve the description of semicore and high-lying states. Because the method is full-potential, the charge density and Kohn-Sham potential are represented without imposing a muffin-tin shape approximation. This all-electron reference is therefore well suited for the present purpose: any difference between SIRIUS-GTH-UZH and SIRIUS-FP-LAPW primarily measures the frozen-core and pseudization error of the GTH-UZH potential, including the quality of semicore and scalar-relativistic transferability.
+
+For heavy elements the relativistic settings are part of the definition of the reference. The SIRIUS full-potential species files contain the radial grid, linearized augmented-plane-wave (LAPW)/augmented-plane-wave plus local-orbital (APW+lo) basis information, core-state treatment, and valence-relativity choice. The CP2K interface exposes the electronic-structure mode as either pseudopotential or full-potential LAPW+lo, and the full-potential setup distinguishes core relativity from valence relativity. In the UZH protocol we compare scalar-relativistic pseudopotentials to scalar-relativistic all-electron references; explicit spin-orbit splittings are outside the present benchmark. This convention keeps the error decomposition aligned with the scalar-relativistic GTH/HGH pseudopotentials used by CP2K/Quickstep.
+
+\section{Molecular calibration}
+
+The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{TM_mol_4.png}
+\caption{\label{fig:si_tm4}
+Additional molecular benchmark statistics for the UZH-MOLOPT basis sequence.}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{TM_mol_5.png}
+\caption{\label{fig:si_tm5}
+Additional molecular benchmark statistics for properties that are more sensitive to basis flexibility.}
+\end{figure}
+
+\section{Representative equation-of-state curves}
+
+The periodic-table heat maps in the main text are compact summaries of many equation-of-state calculations. Representative raw equation-of-state comparisons are shown here for elements that illustrate different error regimes.
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{Cr.pdf}
+\caption{\label{fig:si_cr}
+Representative equation-of-state curves for Cr. The behavior is characteristic of a pseudopotential-limited case in the original settings.}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{Ba.pdf}
+\caption{\label{fig:si_ba}
+Representative equation-of-state curves for Ba. The comparison highlights a case with a substantial Gaussian-basis contribution in the original CP2K-GTH-UZH settings.}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{Ne.pdf}
+\caption{\label{fig:si_ne}
+Representative equation-of-state curves for Ne. Noble gases are sensitive tests of diffuse basis flexibility because their equation-of-state curves are shallow.}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{Au.pdf}
+\caption{\label{fig:si_au}
+Representative equation-of-state curves for Au, illustrating the behavior of a heavy element where relativistic pseudopotential transferability and basis completeness must both be monitored.}
+\end{figure}
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{Ga.pdf}
+\caption{\label{fig:si_ga}
+Representative equation-of-state curves for Ga.}
+\end{figure}
+
+\section{Recommended organization of released data}
+
+For publication, the repository accompanying the paper should contain:
+\begin{enumerate}
+\item CP2K-GTH-UZH AiiDA workflow inputs and parsed results.
+\item SIRIUS-GTH-UZH AiiDA workflow inputs and parsed results.
+\item SIRIUS-FP-LAPW all-electron workflow inputs and parsed results.
+\item Optimized UZH-MOLOPT basis files and GTH-UZH pseudopotential files.
+\item Scripts used to evaluate the $\varepsilon$ metric and generate the periodic-table maps.
+\item A manifest documenting code versions, pseudopotential hashes, basis-file hashes, and workflow protocol names.
+\end{enumerate}
+
+\bibliography{bib_prb_tdk}
+
+\end{document}
