@@ -198,14 +198,7 @@ Distribution of relative bond-length errors for the molecular calibration set. O
 
 Nonlinear bond angles and dihedral angles extend the same analysis beyond local bond distances. They are more sensitive than bond lengths to subtle changes in the electronic structure and to the automated matching of nearly symmetric structures, but the hierarchy of basis quality remains visible; the corresponding distributions are reported in the Supplemental Material.
 
-Figures~\ref{fig:molecular_dipoles} and \ref{fig:molecular_polarizabilities} show the corresponding response-property tests. Dipole moments and polarizabilities provide a stronger probe because they measure the response of the density rather than only the optimized geometry. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
-
-\begin{figure}
-\centering
-\includegraphics[width=\linewidth]{TM_mol_dipoles.png}
-\caption{\label{fig:molecular_dipoles}
-Distribution of relative errors for molecular dipole moments. The statistics include converged structures with non-vanishing dipole moments and show that response-sensitive density properties retain the same systematic basis-set improvement observed for structural observables.}
-\end{figure}
+The response-property tests complete the molecular calibration. Dipole moments follow the same systematic basis-set trend and are reported in the Supplemental Material. Figure~\ref{fig:molecular_polarizabilities} shows the average molecular polarizability, the most demanding response observable in this set. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
 
 \begin{figure}
 \centering
@@ -214,7 +207,7 @@ Distribution of relative errors for molecular dipole moments. The statistics inc
 Distribution of relative errors for average molecular polarizabilities. Polarizabilities are the most demanding molecular response test in this set because they require sufficient diffuse flexibility; TPSS is omitted because this property was not available for meta-generalized-gradient calculations in CP2K.}
 \end{figure}
 
-The combined molecular data therefore support two practical choices. First, DZVP is useful as an economical screening level, but it should not be interpreted as a converged basis for response-sensitive properties. Second, TZV2P provides a more balanced reference level for the UZH optimization loop because it improves both covalent and polar bonding motifs without introducing the numerical fragility that would compromise large periodic calculations. This balance between chemical flexibility and numerical stability is essential: the goal is not to make the largest possible Gaussian basis, but to construct a basis that can be improved systematically together with the corresponding GTH-UZH pseudopotential files.
+Together, the main-text bond-length and polarizability benchmarks, complemented by the angular and dipole-moment statistics in the Supplemental Material, motivate two practical choices. First, DZVP is useful as an economical screening level, but it should not be interpreted as a converged basis for response-sensitive properties. Second, TZV2P provides a more balanced reference level for the UZH optimization loop because it improves both covalent and polar bonding motifs without introducing the numerical fragility that would compromise large periodic calculations. This balance between chemical flexibility and numerical stability is essential: the goal is not to make the largest possible Gaussian basis, but to construct a basis that can be improved systematically together with the corresponding GTH-UZH pseudopotential files.
 
 \subsection{Total error of the original UZH settings}
 

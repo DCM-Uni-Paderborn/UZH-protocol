@@ -49,7 +49,7 @@ For heavy elements the relativistic settings are part of the definition of the r
 
 \section{Molecular calibration}
 
-The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. Figures~\ref{fig:si_molecular_angles} and \ref{fig:si_molecular_dihedrals} provide the angular-observable statistics that complement the main-text bond-length analysis. Figures~\ref{fig:si_bond_classes} and \ref{fig:si_reference_comparison} summarize two additional molecular checks from the thesis-level calibration data: the bond-class dependence of the structural errors and the consistency of Gaussian~16 and CP2K all-electron reference calculations. The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
+The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. Figures~\ref{fig:si_molecular_angles}, \ref{fig:si_molecular_dihedrals}, and \ref{fig:si_molecular_dipoles} provide the angular and dipole-moment statistics that complement the main-text bond-length and polarizability analysis. Figures~\ref{fig:si_bond_classes} and \ref{fig:si_reference_comparison} summarize two additional molecular checks from the thesis-level calibration data: the bond-class dependence of the structural errors and the consistency of Gaussian~16 and CP2K all-electron reference calculations. The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
 
 \begin{figure}
 \centering
@@ -63,6 +63,13 @@ Distribution of relative errors for nonlinear angles in the molecular calibratio
 \includegraphics[width=0.9\linewidth]{TM_mol_dihedrals.png}
 \caption{\label{fig:si_molecular_dihedrals}
 Distribution of relative errors for dihedral angles in the molecular calibration set. The broader tails reflect the stronger sensitivity of torsional coordinates to small structural and matching differences, while the basis-set hierarchy remains consistent with the bond-length and nonlinear-angle tests.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=0.9\linewidth]{TM_mol_dipoles.png}
+\caption{\label{fig:si_molecular_dipoles}
+Distribution of relative errors for molecular dipole moments. The statistics include converged structures with non-vanishing dipole moments and show that response-sensitive density properties retain the same systematic basis-set improvement observed for structural observables.}
 \end{figure}
 
 \begin{figure}[p]
@@ -81,7 +88,7 @@ Comparison of molecular calibration errors obtained with Gaussian~16/def2-QZVP a
 
 \section{Representative equation-of-state curves}
 
-The periodic-table heat maps in the main text are compact summaries of many equation-of-state calculations. Representative raw equation-of-state comparisons are shown here for elements that illustrate different error regimes.
+The periodic-table heat maps in the main text are compact summaries of many equation-of-state calculations. Figures~\ref{fig:si_cr}, \ref{fig:si_ba}, \ref{fig:si_ne}, \ref{fig:si_au}, and \ref{fig:si_ga} show representative raw equation-of-state comparisons for elements that illustrate different error regimes.
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{Cr.pdf}
