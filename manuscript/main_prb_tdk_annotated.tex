@@ -243,14 +243,21 @@ The molecular benchmark confirms the expected systematic behavior of the UZH-MOL
 Distribution of relative bond-length errors for the molecular calibration set. Outliers are omitted from the box plot to emphasize the median and interquartile behavior. The systematic narrowing from DZVP to TZV2P indicates controlled basis-set convergence for local structural properties.}
 \end{figure}
 
-\TDKout{Angular properties follow the same pattern.}\TDKin{Figure~\ref{fig:molecular_angles} extends the same analysis beyond local bond distances.} Nonlinear bond angles and dihedral angles are more sensitive than bond lengths to subtle changes in the electronic structure\TDKin{ and to the automated matching of nearly symmetric structures}, but the hierarchy of basis quality remains \TDKout{clear}\TDKin{visible}.
+\TDKout{Angular properties follow the same pattern.}\TDKin{Figures~\ref{fig:molecular_angles} and \ref{fig:molecular_dihedrals} extend the same analysis beyond local bond distances.} Nonlinear bond angles and dihedral angles are more sensitive than bond lengths to subtle changes in the electronic structure\TDKin{ and to the automated matching of nearly symmetric structures}, but the hierarchy of basis quality remains \TDKout{clear}\TDKin{visible}.
 
-\begin{figure*}
+\begin{figure}
 \centering
-\includegraphics[width=\textwidth]{TM_mol_2.png}
+\includegraphics[width=\linewidth]{TM_mol_angles.png}
 \caption{\label{fig:molecular_angles}
-\TDKout{Molecular calibration beyond bond lengths. Left: relative errors for nonlinear and dihedral angles. Right: relative errors for dipole moments and average molecular polarizabilities. Response properties are more demanding than equilibrium bond lengths, but they retain the systematic basis-set improvement needed before transferring the basis to periodic verification.}\TDKin{Molecular calibration of angular observables. The distributions show relative errors for nonlinear angles and dihedral angles. These quantities are more sensitive than bond lengths to automated atom matching and near-symmetric geometries, but they retain the same systematic basis-set trend.}}
-\end{figure*}
+\TDKout{Molecular calibration of angular observables. The distributions show relative errors for nonlinear angles and dihedral angles. These quantities are more sensitive than bond lengths to automated atom matching and near-symmetric geometries, but they retain the same systematic basis-set trend.}\TDKin{Distribution of relative errors for nonlinear angles in the molecular calibration set. Angular observables are more sensitive than bond lengths to automated atom matching and near-symmetric geometries, but the systematic improvement from DZVP to TZV2P remains visible.}}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics[width=\linewidth]{TM_mol_dihedrals.png}
+\caption{\label{fig:molecular_dihedrals}
+\TDKin{Distribution of relative errors for dihedral angles in the molecular calibration set. The broader tails reflect the stronger sensitivity of torsional coordinates to small structural and matching differences, while the basis-set hierarchy remains consistent with the bond-length and angle tests.}}
+\end{figure}
 
 \TDKin{Figure~\ref{fig:molecular_response} shows the corresponding response-property tests.} Dipole moments and polarizabilities provide a stronger test because they probe the response of the density rather than only the optimized geometry. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
 
