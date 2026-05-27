@@ -49,18 +49,12 @@ For heavy elements the relativistic settings are part of the definition of the r
 
 \section{Molecular calibration}
 
-The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. Figure~\ref{fig:si_tm4} isolates the molecular polarizability test because it is the most basis-sensitive response property in the benchmark, while Fig.~\ref{fig:si_tm5} shows the additional PBE0 calculations with the auxiliary density matrix method. The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
-
-\begin{figure}
-\includegraphics[width=0.9\linewidth]{TM_mol_4.png}
-\caption{\label{fig:si_tm4}
-Distribution of relative errors for the average molecular polarizability. The plot compares the pseudopotential UZH-MOLOPT sequence with the all-electron MOLOPT sequence for PBE and PBE0; TPSS is not shown because this response property was not available for meta-generalized-gradient calculations in CP2K.}
-\end{figure}
+The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. Figure~\ref{fig:si_admm} shows the additional PBE0 calculations with the auxiliary density matrix method, which provide a sensitive check of auxiliary-basis consistency for hybrid-functional calculations. The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{TM_mol_5.png}
-\caption{\label{fig:si_tm5}
-Direct comparison of PBE0 and PBE0 calculations with the auxiliary density matrix method for the same UZH-MOLOPT basis levels. Geometric observables remain close, while dipoles and polarizabilities provide the more sensitive tests of the auxiliary basis.}
+\caption{\label{fig:si_admm}
+Direct comparison of PBE0 calculations performed without and with the auxiliary density matrix method for the same UZH-MOLOPT basis levels. Geometric observables remain close, while dipoles and polarizabilities provide the more sensitive tests of the auxiliary basis.}
 \end{figure}
 
 \section{Representative equation-of-state curves}
