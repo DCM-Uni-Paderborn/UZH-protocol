@@ -231,6 +231,8 @@ The optimization loop uses the updated CP2K ATOM code developed as part of the p
 
 \section{Results and discussion}
 
+\TDKin{The results are organized as a diagnostic sequence. Section~IV.A identifies the smallest converged UZH-MOLOPT basis set suitable for production GPW calculations while retaining numerical stability. Section~IV.B then quantifies the total error of the original CP2K-GTH-UZH settings before optimization. Section~IV.C separates this total error into Gaussian-basis and pseudopotential contributions by inserting the SIRIUS-GTH-UZH reference between CP2K-GTH-UZH and SIRIUS-FP-LAPW. Finally, Sec.~IV.D evaluates the optimized UZH settings and shows whether the targeted basis-set and pseudopotential revisions reduce the dominant outliers.}
+
 \subsection{Molecular basis calibration}
 
 The molecular benchmark confirms the expected systematic behavior of the UZH-MOLOPT sequence. Figure~\ref{fig:bonds} reports the first and most local test: relative bond-length errors with respect to the all-electron molecular reference. The distribution narrows from DZVP to TZVP and TZV2P, with the median relative error remaining small across the database. Carbon-containing bonds are particularly stable, while O- and F-containing compounds are more sensitive to polarization and diffuse flexibility in the smaller basis sets. The TZV2P level removes most of these systematic trends.
