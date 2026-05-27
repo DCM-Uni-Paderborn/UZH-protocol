@@ -97,13 +97,21 @@ For heavy elements the relativistic settings are part of the definition of the r
 
 \section{Molecular calibration}
 
-The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. \TDKin{The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. }\TDKout{The previous SI text described an additional polarizability-only figure and a PBE0 auxiliary-density-matrix-method comparison. }\TDKin{Figure~\ref{fig:si_admm} shows the additional PBE0 calculations with the auxiliary density matrix method, which provide a sensitive check of auxiliary-basis consistency for hybrid-functional calculations. }The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
+The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. \TDKin{The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. }\TDKout{The previous SI text described an additional polarizability-only figure and a PBE0 auxiliary-density-matrix-method comparison. }\TDKout{The removed SI figure showed additional PBE0 calculations with the auxiliary density matrix method. }\TDKin{Figures~\ref{fig:si_bond_classes} and \ref{fig:si_reference_comparison} summarize two additional molecular checks from the thesis-level calibration data: the bond-class dependence of the structural errors and the consistency of Gaussian~16 and CP2K all-electron reference calculations. }The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
 
-\begin{figure}
-\includegraphics[width=0.9\linewidth]{TM_mol_5.png}
-\caption{\label{fig:si_admm}
-\TDKout{Additional molecular benchmark statistics for properties that are more sensitive to basis flexibility.}\TDKin{Direct comparison of PBE0 calculations performed without and with the auxiliary density matrix method for the same UZH-MOLOPT basis levels. Geometric observables remain close, while dipoles and polarizabilities provide the more sensitive tests of the auxiliary basis.}}
+\begin{figure}[p]
+\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{TM_thesis_fig_4_13.png}
+\caption{\label{fig:si_bond_classes}
+\TDKin{Bond-class-resolved distribution of relative bond-length errors across the molecular calibration set, adapted from Fig.~4.13 of Ref.~\cite{MullerThesis2024}. Outliers are hidden and the C--C panel uses a smaller vertical scale. The grouping shows that the UZH-MOLOPT basis sequence improves systematically across chemically distinct bond classes before periodic verification.}}
 \end{figure}
+
+\begin{figure}[p]
+\includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{TM_thesis_fig_4_16.png}
+\caption{\label{fig:si_reference_comparison}
+\TDKin{Comparison of molecular calibration errors obtained with Gaussian~16/def2-QZVP and CP2K/GAPW-QZVPP all-electron references, adapted from Fig.~4.16 of Ref.~\cite{MullerThesis2024}. Relative errors are shown for bond lengths, dipole moments, and average molecular polarizabilities, while absolute errors are shown for angles and dihedral angles. The close agreement supports the use of the CP2K all-electron molecular reference in the UZH calibration loop.}}
+\end{figure}
+
+\clearpage
 
 \section{Representative equation-of-state curves}
 
