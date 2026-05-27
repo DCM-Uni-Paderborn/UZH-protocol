@@ -249,12 +249,14 @@ Nonlinear bond angles and dihedral angles extend the same analysis beyond local 
 
 The response-property tests complete the molecular calibration. Dipole moments follow the same systematic basis-set trend and are reported in the Supplemental Material. Figure~\ref{fig:molecular_polarizabilities} shows the average molecular polarizability, the most demanding response observable in this set. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
 
-\begin{figure}
+\begin{figure*}
 \centering
-\includegraphics[width=\linewidth]{TM_mol_polarizabilities.png}
+\TDKout{Original one-column, low-resolution raster figure.}\\[0.5ex]
+\TDKin{\includegraphics[width=0.70\textwidth]{TM_mol_polarizabilities_highres.png}}
+\TDKcomment{Changed Fig.~3 to a two-column float and replaced the low-resolution raster with a cropped, upsampled, sharpened version.}
 \caption{\label{fig:molecular_polarizabilities}
 Distribution of relative errors for average molecular polarizabilities. Polarizabilities are the most demanding molecular response test in this set because they require sufficient diffuse flexibility; TPSS is omitted because this property was not available for meta-generalized-gradient calculations in CP2K.}
-\end{figure}
+\end{figure*}
 
 Together, the main-text bond-length and polarizability benchmarks, complemented by the angular and dipole-moment statistics in the Supplemental Material, motivate two practical choices. First, DZVP is useful as an economical screening level, but it should not be interpreted as a converged basis for response-sensitive properties. Second, TZV2P provides a more balanced reference level for the UZH optimization loop because it improves both covalent and polar bonding motifs without introducing the numerical fragility that would compromise large periodic calculations. This balance between chemical flexibility and numerical stability is essential: the goal is not to make the largest possible Gaussian basis, but to construct a basis that can be improved systematically together with the corresponding GTH-UZH pseudopotential files. \TDKin{Consequently, all periodic CP2K-GTH-UZH calculations discussed below use the TZV2P UZH-MOLOPT basis level unless stated otherwise.}
 
