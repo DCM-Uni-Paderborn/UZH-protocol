@@ -7,10 +7,6 @@
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{makecell}
-\definecolor{TDKgreen}{rgb}{0,0.45,0}
-\newcommand{\TDKin}[1]{\textcolor{blue}{#1}}
-\newcommand{\TDKout}[1]{\textcolor{red}{#1}}
-\newcommand{\TDKcomment}[1]{\textcolor{TDKgreen}{\textbf{[TDK:} #1\textbf{]}}}
 
 \begin{document}
 
@@ -262,13 +258,13 @@ Error decomposition for the original UZH settings. Top: CP2K-GTH-UZH relative to
 
 The classification in Table~\ref{tab:classification} was used to revise the settings in a targeted way. Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. Pseudopotential-limited elements were treated by refitting the GTH parameters with the CP2K ATOM code, including scalar-relativistic atomic reference information and semicore states where appropriate. This targeted route differs from a brute-force convergence exercise: it changes only the component that the error decomposition identifies as limiting.
 
-\TDKout{Figure~\ref{fig:component_updates} resolves the remaining error after optimization into residual component contributions. The top panel shows the residual CP2K Gaussian-basis contribution by subtracting the residual pseudopotential map from the final CP2K-GTH-UZH-new total-error map and retaining the positive part. The bottom panel shows the residual pseudopotential error directly as SIRIUS-GTH-UZH-new relative to the SIRIUS-FP-LAPW reference.}\TDKin{Figure~\ref{fig:component_updates} summarizes the residual components of the optimized setup. The top panel represents the residual CP2K Gaussian-basis contribution associated with the optimized GTH-UZH-new setup, while the bottom panel gives the residual pseudopotential contribution relative to the SIRIUS-FP-LAPW reference.} Read together with the total-error reduction in Fig.~\ref{fig:total_before_after}, these maps show that the improvement is not a cosmetic redistribution of errors but a targeted reduction of the components identified as limiting. The full pseudopotential before--after diagnostic and the direct pseudopotential-update map are reported in the Supplemental Material.
+Figure~\ref{fig:component_updates} reports the two optimized comparisons that define the remaining error components. The top panel compares CP2K-GTH-UZH-new with SIRIUS-GTH-UZH-new and therefore gives the Gaussian-basis contribution for the optimized settings. The bottom panel compares SIRIUS-GTH-UZH-new with SIRIUS-FP-LAPW and gives the pseudopotential contribution. Read together with the total-error reduction in Fig.~\ref{fig:total_before_after}, these maps show that the improvement is not a cosmetic redistribution of errors but a targeted reduction of the components identified as limiting. The full pseudopotential before--after diagnostic and the direct pseudopotential-update map are reported in the Supplemental Material.
 
 \begin{figure*}
-\includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-new-vs-SIRIUS-UZH-new-epsilon-estimated-padded.png}\\[0.5ex]
+\includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-new-vs-SIRIUS-UZH-new-epsilon-padded.png}\\[0.5ex]
 \includegraphics[width=\textwidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-LAPW-epsilon-padded-strongbox.png}
 \caption{\label{fig:component_updates}
-Residual component diagnostics for the improved UZH settings. Top: residual CP2K Gaussian-basis contribution associated with the optimized GTH-UZH-new setup. Bottom: residual pseudopotential contribution for the improved SIRIUS-GTH-UZH-new settings relative to the SIRIUS-FP-LAPW reference.}
+Optimized UZH error decomposition. Top: CP2K-GTH-UZH-new relative to SIRIUS-GTH-UZH-new, i.e., the Gaussian-basis component after optimization. Bottom: SIRIUS-GTH-UZH-new relative to SIRIUS-FP-LAPW, i.e., the pseudopotential component after optimization.}
 \end{figure*}
 
 The improved settings reduce the dominant outliers of the original protocol and make the remaining discrepancies more interpretable. In particular, noble-gas and Ba errors are reduced by basis-set changes, while the transition-metal cases respond to pseudopotential refitting. The resulting UZH protocol is therefore not a fixed table of parameters but a reproducible recipe for diagnosing, optimizing, and validating CP2K settings.
