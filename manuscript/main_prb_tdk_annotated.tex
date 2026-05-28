@@ -289,7 +289,7 @@ Basis set & Large CP2K-GTH-UZH vs SIRIUS-GTH-UZH error & He, Ne, Ar, Kr, Xe, Rn,
 
 \subsection{Separating basis and pseudopotential errors}
 
-The decomposition in Eq.~(\ref{eq:decomposition}) reveals three distinct regimes\TDKin{, which are shown in Fig.~\ref{fig:pp_basis_old} from left to right as basis-set and pseudopotential errors}. First, \DIFdelbegin \DIFdel{for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
+The decomposition in Eq.~(\ref{eq:decomposition}) reveals three distinct regimes\TDKin{, which are shown in Fig.~\ref{fig:pp_basis_old} from top to bottom as basis-set and pseudopotential errors}. First, \DIFdelbegin \DIFdel{for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
 }%DIFDELCMD < 
 
 %DIFDELCMD < %%%
@@ -301,10 +301,10 @@ The decomposition in Eq.~(\ref{eq:decomposition}) reveals three distinct regimes
 \DIFaddend Third, some heavy elements show mixed behavior. In these cases both pairwise comparisons are non-negligible, and the improvement strategy must combine \TDKout{pseudopotential refitting with basis-set extension or reoptimization}\TDKin{basis-set extension or reoptimization with pseudopotential refitting}.
 
 \begin{figure*}
-\includegraphics[width=0.49\textwidth]{periodic-table-unaries-CP2K-UZH-vs-SIRIUS-UZH-epsilon.png}
-\includegraphics[width=0.49\textwidth]{periodic-table-unaries-SIRIUS-UZH-vs-SIRIUS-LAPW-epsilon.png}
+\includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-vs-SIRIUS-UZH-epsilon.png}\\[0.5ex]
+\includegraphics[width=\textwidth]{periodic-table-unaries-SIRIUS-UZH-vs-SIRIUS-LAPW-epsilon.png}
 \caption{\label{fig:pp_basis_old}
-Error decomposition for the original UZH settings. Left: CP2K-GTH-UZH relative to SIRIUS-GTH-UZH, which isolates the Gaussian-basis error. Right: SIRIUS-GTH-UZH relative to SIRIUS-FP-LAPW, which isolates the pseudopotential error.}
+Error decomposition for the original UZH settings. Top: CP2K-GTH-UZH relative to SIRIUS-GTH-UZH, which isolates the Gaussian-basis error. Bottom: SIRIUS-GTH-UZH relative to SIRIUS-FP-LAPW, which isolates the pseudopotential error.}
 \end{figure*}
 
 \subsection{Improved UZH settings}
