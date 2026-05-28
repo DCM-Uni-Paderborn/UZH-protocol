@@ -3,8 +3,13 @@
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
+\usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{makecell}
+\definecolor{TDKgreen}{rgb}{0,0.45,0}
+\newcommand{\TDKin}[1]{\textcolor{blue}{#1}}
+\newcommand{\TDKout}[1]{\textcolor{red}{#1}}
+\newcommand{\TDKcomment}[1]{\textcolor{TDKgreen}{\textbf{[TDK:} #1\textbf{]}}}
 
 \begin{document}
 
@@ -87,6 +92,8 @@ Comparison of molecular calibration errors obtained with Gaussian~16/def2-QZVP a
 \clearpage
 
 \section{Additional improved-setting diagnostics}
+
+\TDKin{Figures~\ref{fig:si_pp_before_after} and \ref{fig:si_pp_update} provide complementary, not redundant, diagnostics of the pseudopotential part of the UZH optimization. Figure~\ref{fig:si_pp_before_after} compares each pseudopotential generation with the SIRIUS-FP-LAPW all-electron reference and therefore measures the remaining pseudopotential transferability error before and after optimization. In contrast, Fig.~\ref{fig:si_pp_update} compares SIRIUS-GTH-UZH-new directly with the original SIRIUS-GTH-UZH setup and therefore shows where the pseudopotential update changes the equation-of-state curves. Large changes in Fig.~\ref{fig:si_pp_update} that coincide with reduced errors in the lower panel of Fig.~\ref{fig:si_pp_before_after} identify successful refits, whereas any element that remains large in the lower panel of Fig.~\ref{fig:si_pp_before_after} marks residual pseudopotential error that is not removed by the present update.}
 
 \begin{figure}
 \centering
