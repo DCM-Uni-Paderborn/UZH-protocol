@@ -7,6 +7,10 @@
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{makecell}
+\definecolor{TDKgreen}{rgb}{0,0.45,0}
+\newcommand{\TDKin}[1]{\textcolor{blue}{#1}}
+\newcommand{\TDKout}[1]{\textcolor{red}{#1}}
+\newcommand{\TDKcomment}[1]{\textcolor{TDKgreen}{\textbf{[TDK:} #1\textbf{]}}}
 
 \begin{document}
 
@@ -258,7 +262,7 @@ Error decomposition for the original UZH settings. Top: CP2K-GTH-UZH relative to
 
 The classification in Table~\ref{tab:classification} was used to revise the settings in a targeted way. Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. Pseudopotential-limited elements were treated by refitting the GTH parameters with the CP2K ATOM code, including scalar-relativistic atomic reference information and semicore states where appropriate. This targeted route differs from a brute-force convergence exercise: it changes only the component that the error decomposition identifies as limiting.
 
-Figure~\ref{fig:component_updates} reports the two optimized comparisons that define the remaining error components. The top panel compares CP2K-GTH-UZH-new with SIRIUS-GTH-UZH-new and therefore gives the Gaussian-basis contribution for the optimized settings. The bottom panel compares SIRIUS-GTH-UZH-new with SIRIUS-FP-LAPW and gives the pseudopotential contribution. Read together with the total-error reduction in Fig.~\ref{fig:total_before_after}, these maps show that the improvement is not a cosmetic redistribution of errors but a targeted reduction of the components identified as limiting. The full pseudopotential before--after diagnostic and the direct pseudopotential-update map are reported in the Supplemental Material.
+Figure~\ref{fig:component_updates} reports the two optimized comparisons that define the remaining error components. The top panel compares CP2K-GTH-UZH-new with SIRIUS-GTH-UZH-new and therefore gives the Gaussian-basis contribution for the optimized settings. The bottom panel compares SIRIUS-GTH-UZH-new with SIRIUS-FP-LAPW and gives the pseudopotential contribution. \TDKin{At the level of the underlying signed equation-of-state energy differences, the superposition of the upper and lower comparisons corresponds to the remaining total CP2K-GTH-UZH-new error relative to SIRIUS-FP-LAPW shown in the bottom panel of Fig.~\ref{fig:total_before_after}; the positive $\varepsilon$ values themselves should therefore be interpreted as component norms rather than added element by element.} Read together with the total-error reduction in Fig.~\ref{fig:total_before_after}, these maps show that the improvement is not a cosmetic redistribution of errors but a targeted reduction of the components identified as limiting. The full pseudopotential before--after diagnostic and the direct pseudopotential-update map are reported in the Supplemental Material.
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-new-vs-SIRIUS-UZH-new-epsilon-padded.png}\\[0.5ex]
