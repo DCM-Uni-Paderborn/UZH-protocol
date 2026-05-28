@@ -249,14 +249,14 @@ Nonlinear bond angles and dihedral angles extend the same analysis beyond local 
 
 The response-property tests complete the molecular calibration. Dipole moments follow the same systematic basis-set trend and are reported in the Supplemental Material. Figure~\ref{fig:molecular_polarizabilities} shows the average molecular polarizability, the most demanding response observable in this set. The larger variance observed for polarizabilities is consistent with the need for diffuse flexibility, but the absence of catastrophic outliers at the TZV2P level indicates that the condition-number constraint in Eq.~(\ref{eq:molopt}) is effective.
 
-\begin{figure*}
+\begin{figure}
 \centering
-\TDKout{Original one-column, low-resolution raster figure.}\\[0.5ex]
-\TDKin{\includegraphics[width=0.70\textwidth]{TM_mol_polarizabilities_highres.png}}
-\TDKcomment{Changed Fig.~3 to a two-column float and replaced the low-resolution raster with a cropped, upsampled, sharpened version.}
+\TDKout{Previous enlarged two-column raster version removed.}\\[0.5ex]
+\TDKin{\includegraphics[width=\linewidth]{TM_mol_polarizabilities_singlecol.png}}
+\TDKcomment{Set Fig.~3 back to a single-column float and replaced the previous enlarged raster by a more strongly cropped and sharpened single-column version.}
 \caption{\label{fig:molecular_polarizabilities}
 Distribution of relative errors for average molecular polarizabilities. Polarizabilities are the most demanding molecular response test in this set because they require sufficient diffuse flexibility; TPSS is omitted because this property was not available for meta-generalized-gradient calculations in CP2K.}
-\end{figure*}
+\end{figure}
 
 Together, the main-text bond-length and polarizability benchmarks, complemented by the angular and dipole-moment statistics in the Supplemental Material, motivate two practical choices. First, DZVP is useful as an economical screening level, but it should not be interpreted as a converged basis for response-sensitive properties. Second, TZV2P provides a more balanced reference level for the UZH optimization loop because it improves both covalent and polar bonding motifs without introducing the numerical fragility that would compromise large periodic calculations. This balance between chemical flexibility and numerical stability is essential: the goal is not to make the largest possible Gaussian basis, but to construct a basis that can be improved systematically together with the corresponding GTH-UZH pseudopotential files. \TDKin{Consequently, all periodic CP2K-GTH-UZH calculations discussed below use the TZV2P UZH-MOLOPT basis level unless stated otherwise.}
 
@@ -269,7 +269,7 @@ Figure~\ref{fig:total_old} shows the total practical error of the original CP2K-
 \TDKin{This distinction is central for interpreting $\varepsilon$. A large total error does not automatically mean that the CP2K Gaussian basis must be enlarged, and a small total error does not prove that basis and pseudopotential errors are individually negligible; partial cancellation is possible. For parameter development, the total CP2K-GTH-UZH versus SIRIUS-FP-LAPW comparison has to be read together with the two intermediate comparisons summarized in Table~\ref{tab:classification}. Only then can the protocol decide whether the next iteration should modify the MOLOPT basis, refit the GTH pseudopotential parameters, or treat both components.}
 
 \begin{figure*}
-\TDKout{\includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-vs-SIRIUS-LAPW-epsilon.png}}
+\TDKout{Previous Fig.~4 raster with internal title removed.}\\[0.5ex]
 \TDKin{\includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-vs-SIRIUS-LAPW-epsilon-notitle.png}}
 \TDKcomment{Removed the internal title from Fig.~4 by switching to a cropped raster file.}
 \caption{\label{fig:total_old}
@@ -323,8 +323,8 @@ Figures~\ref{fig:improved_pp} and \ref{fig:improved_total} \TDKout{show the resu
 \TDKout{\makebox[0.49\textwidth][l]{\textbf{(a)}}\hfill
 \makebox[0.49\textwidth][l]{\textbf{(b)}}\\[-0.5ex]}
 \TDKin{\includegraphics[width=0.49\textwidth]{periodic-table-unaries-CP2K-UZH-new-vs-SIRIUS-UZH-new-epsilon-estimated-padded.png}\hfill
-\includegraphics[width=0.49\textwidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-LAPW-epsilon-padded.png}}
-\TDKcomment{Removed the panel letters and added top padding to both Fig.~6 raster files so that the upper structure boxes are no longer clipped.}
+\includegraphics[width=0.49\textwidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-LAPW-epsilon-padded-strongbox.png}}
+\TDKcomment{Removed the panel letters, added top padding to both Fig.~6 raster files, and strengthened the blue structure-box border in the right panel so that the upper line remains visible after scaling.}
 \caption{\label{fig:improved_pp}
 \TDKout{Verification of the improved UZH settings. Top left: total CP2K-GTH-UZH-new error relative to SIRIUS-FP-LAPW. Top right: residual CP2K Gaussian-basis error. Bottom left: residual pseudopotential error after improvement. Bottom right: direct comparison of new and original SIRIUS-GTH-UZH pseudopotential settings.}\TDKout{(a) Illustrative estimate of the residual CP2K Gaussian-basis contribution after improvement, constructed as $\max[\epsilon_{\mathrm{total}}-\epsilon_{\mathrm{pp}},0]$ from Fig.~\ref{fig:improved_total} and panel (b). (b) Residual pseudopotential error for the improved UZH settings, obtained from SIRIUS-GTH-UZH-new relative to the SIRIUS-FP-LAPW reference.}\TDKin{Left: illustrative estimate of the residual CP2K Gaussian-basis contribution after improvement, constructed as $\max[\epsilon_{\mathrm{total}}-\epsilon_{\mathrm{pp}},0]$ from Fig.~\ref{fig:improved_total} and the residual pseudopotential map. Right: residual pseudopotential error for the improved UZH settings, obtained from SIRIUS-GTH-UZH-new relative to the SIRIUS-FP-LAPW reference.}}
 \end{figure*}
