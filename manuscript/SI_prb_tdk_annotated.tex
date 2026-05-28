@@ -1,58 +1,10 @@
 \documentclass[aps,prb,preprint,amsmath,amssymb,superscriptaddress,longbibliography,floatfix]{revtex4-2}
-%DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL /tmp/SI_prb_tdk_before_basis_order.tex   Tue May 26 22:50:05 2026
-%DIF ADD SI_prb_tdk.tex                           Tue May 26 22:49:19 2026
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{makecell}
-%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
-%DIF CTRADITIONAL PREAMBLE %DIF PREAMBLE
-\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
-\definecolor{TDKgreen}{rgb}{0,0.45,0}
-\RequirePackage[normalem]{ulem} %DIF PREAMBLE
-\RequirePackage[stable]{footmisc} %DIF PREAMBLE
-\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf} %DIF PREAMBLE
-\providecommand{\DIFadd}[1]{{\protect\color{blue} #1}} %DIF PREAMBLE
-\providecommand{\DIFdel}[1]{{\protect\color{red}#1}} %DIF PREAMBLE
-%DIF SAFE PREAMBLE %DIF PREAMBLE
-\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
-\providecommand{\DIFaddend}{} %DIF PREAMBLE
-\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
-\providecommand{\DIFdelend}{} %DIF PREAMBLE
-\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
-\providecommand{\DIFmodend}{} %DIF PREAMBLE
-%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
-\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
-\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
-\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
-\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
-\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
-\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
-%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
-\RequirePackage{listings} %DIF PREAMBLE
-\RequirePackage{color} %DIF PREAMBLE
-\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
-%DIF DIFCODE_CTRADITIONAL %DIF PREAMBLE
-  moredelim=[il][\color{red}\scriptsize]{\%DIF\ <\ }, %DIF PREAMBLE
-  moredelim=[il][\color{blue}\sffamily]{\%DIF\ >\ } %DIF PREAMBLE
-} %DIF PREAMBLE
-\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
-	language=DIFcode, %DIF PREAMBLE
-	basicstyle=\ttfamily, %DIF PREAMBLE
-	columns=fullflexible, %DIF PREAMBLE
-	keepspaces=true %DIF PREAMBLE
-} %DIF PREAMBLE
-\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
-\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
-\lstset{extendedchars=\true,inputencoding=utf8}
-\newcommand{\TDKin}[1]{\textcolor{blue}{#1}}
-\newcommand{\TDKout}[1]{\textcolor{red}{#1}}
-\newcommand{\TDKcomment}[1]{\textcolor{TDKgreen}{\textbf{[TDK:} #1\textbf{]}}}
-
-%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
 
@@ -97,74 +49,71 @@ For heavy elements the relativistic settings are part of the definition of the r
 
 \section{Molecular calibration}
 
-The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. \TDKin{The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. }\TDKout{The previous SI text described an additional polarizability-only figure and a PBE0 auxiliary-density-matrix-method comparison. }\TDKout{The removed SI figure showed additional PBE0 calculations with the auxiliary density matrix method. }\TDKin{Figures~\ref{fig:si_molecular_angles}, \ref{fig:si_molecular_dihedrals}, and \ref{fig:si_molecular_dipoles} provide the angular and dipole-moment statistics that complement the main-text bond-length and polarizability analysis. Figures~\ref{fig:si_bond_classes} and \ref{fig:si_reference_comparison} summarize two additional molecular checks from the thesis-level calibration data: the bond-class dependence of the structural errors and the consistency of Gaussian~16 and CP2K all-electron reference calculations. }The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
+The molecular calibration assesses the revised UZH-MOLOPT basis sequence before the solid-state verification step. The benchmark contains small molecules covering main-group bonds, polar bonds, non-linear and dihedral angles, dipole moments, polarizabilities, and vibrational frequencies. The underlying CP2K molecular test calculations are provided in the MolTest Zenodo archive, which contains calculations with revised CP2K basis sets and pseudopotentials and CP2K all-electron basis sets for PBE, PBE0, and TPSS~\cite{HutterMuller2023MolTest}. Figures~\ref{fig:si_molecular_angles}, \ref{fig:si_molecular_dihedrals}, and \ref{fig:si_molecular_dipoles} provide the angular and dipole-moment statistics that complement the main-text bond-length and polarizability analysis. Figures~\ref{fig:si_bond_classes} and \ref{fig:si_reference_comparison} summarize two additional molecular checks from the thesis-level calibration data: the bond-class dependence of the structural errors and the consistency of Gaussian~16 and CP2K all-electron reference calculations. The role of this stage is to ensure chemically balanced transferability and numerical stability before the basis is used in periodic calculations.
 
 \begin{figure}
 \centering
 \includegraphics[width=0.9\linewidth]{TM_mol_angles.png}
 \caption{\label{fig:si_molecular_angles}
-\TDKin{Distribution of relative errors for nonlinear angles in the molecular calibration set. Angular observables are more sensitive than bond lengths to automated atom matching and near-symmetric geometries, but the systematic improvement from DZVP to TZV2P remains visible.}}
+Distribution of relative errors for nonlinear angles in the molecular calibration set. Angular observables are more sensitive than bond lengths to automated atom matching and near-symmetric geometries, but the systematic improvement from DZVP to TZV2P remains visible.}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=0.9\linewidth]{TM_mol_dihedrals.png}
 \caption{\label{fig:si_molecular_dihedrals}
-\TDKin{Distribution of relative errors for dihedral angles in the molecular calibration set. The broader tails reflect the stronger sensitivity of torsional coordinates to small structural and matching differences, while the basis-set hierarchy remains consistent with the bond-length and nonlinear-angle tests.}}
+Distribution of relative errors for dihedral angles in the molecular calibration set. The broader tails reflect the stronger sensitivity of torsional coordinates to small structural and matching differences, while the basis-set hierarchy remains consistent with the bond-length and nonlinear-angle tests.}
 \end{figure}
 
 \begin{figure}
 \centering
 \includegraphics[width=0.9\linewidth]{TM_mol_dipoles.png}
 \caption{\label{fig:si_molecular_dipoles}
-\TDKin{Distribution of relative errors for molecular dipole moments, adapted from Fig.~4.11 of Ref.~\cite{MullerThesis2024}. The statistics include converged structures with non-vanishing dipole moments and show that response-sensitive density properties retain the same systematic basis-set improvement observed for structural observables.}}
+Distribution of relative errors for molecular dipole moments, adapted from Fig.~4.11 of Ref.~\cite{MullerThesis2024}. The statistics include converged structures with non-vanishing dipole moments and show that response-sensitive density properties retain the same systematic basis-set improvement observed for structural observables.}
 \end{figure}
 
 \begin{figure}[p]
 \includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{TM_thesis_fig_4_13.png}
 \caption{\label{fig:si_bond_classes}
-\TDKin{Bond-class-resolved distribution of relative bond-length errors across the molecular calibration set, adapted from Fig.~4.13 of Ref.~\cite{MullerThesis2024}. Outliers are hidden and the C--C panel uses a smaller vertical scale. The grouping shows that the UZH-MOLOPT basis sequence improves systematically across chemically distinct bond classes before periodic verification.}}
+Bond-class-resolved distribution of relative bond-length errors across the molecular calibration set, adapted from Fig.~4.13 of Ref.~\cite{MullerThesis2024}. Outliers are hidden and the C--C panel uses a smaller vertical scale. The grouping shows that the UZH-MOLOPT basis sequence improves systematically across chemically distinct bond classes before periodic verification.}
 \end{figure}
 
 \begin{figure}[p]
 \includegraphics[width=\linewidth,height=0.82\textheight,keepaspectratio]{TM_thesis_fig_4_16.png}
 \caption{\label{fig:si_reference_comparison}
-\TDKin{Comparison of molecular calibration errors obtained with Gaussian~16/def2-QZVP and CP2K/GAPW-QZVPP all-electron references, adapted from Fig.~4.16 of Ref.~\cite{MullerThesis2024}. Relative errors are shown for bond lengths, dipole moments, and average molecular polarizabilities, while absolute errors are shown for angles and dihedral angles. The close agreement supports the use of the CP2K all-electron molecular reference in the UZH calibration loop.}}
+Comparison of molecular calibration errors obtained with Gaussian~16/def2-QZVP and CP2K/GAPW-QZVPP all-electron references, adapted from Fig.~4.16 of Ref.~\cite{MullerThesis2024}. Relative errors are shown for bond lengths, dipole moments, and average molecular polarizabilities, while absolute errors are shown for angles and dihedral angles. The close agreement supports the use of the CP2K all-electron molecular reference in the UZH calibration loop.}
 \end{figure}
 
 \clearpage
 
-\section{\TDKout{Additional pseudopotential-update diagnostic}\TDKin{Additional improved-setting diagnostics}}
+\section{Additional improved-setting diagnostics}
 
 \begin{figure}
 \centering
-\TDKout{Previous side-by-side panel layout.}
-\TDKin{\includegraphics[width=0.94\linewidth]{periodic-table-unaries-CP2K-UZH-new-vs-SIRIUS-UZH-new-epsilon-estimated-padded.png}\\[0.3ex]
-\includegraphics[width=0.94\linewidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-LAPW-epsilon-padded-strongbox.png}}
+\includegraphics[width=0.94\linewidth]{periodic-table-unaries-CP2K-UZH-new-vs-SIRIUS-UZH-new-epsilon-estimated-padded.png}\\[0.3ex]
+\includegraphics[width=0.94\linewidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-LAPW-epsilon-padded-strongbox.png}
 \caption{\label{fig:si_residual_basis_pp}
-\TDKout{Previous left/right panel wording.}\TDKin{Residual diagnostic for the improved settings. Top: residual CP2K Gaussian-basis contribution, constructed as the positive difference between the final CP2K-GTH-UZH-new total-error map and the residual pseudopotential map. Bottom: residual pseudopotential error for the improved SIRIUS-GTH-UZH-new settings relative to the SIRIUS-FP-LAPW reference. The top panel is a diagnostic estimate rather than a direct CP2K-GTH-UZH-new/SIRIUS-GTH-UZH-new equation-of-state comparison.}}
+Residual diagnostic for the improved settings. Top: residual CP2K Gaussian-basis contribution, constructed as the positive difference between the final CP2K-GTH-UZH-new total-error map and the residual pseudopotential map. Bottom: residual pseudopotential error for the improved SIRIUS-GTH-UZH-new settings relative to the SIRIUS-FP-LAPW reference. The top panel is a diagnostic estimate rather than a direct CP2K-GTH-UZH-new/SIRIUS-GTH-UZH-new equation-of-state comparison.}
 \end{figure}
 
 \begin{figure}
 \centering
-\TDKin{\includegraphics[width=0.9\linewidth]{periodic-table-unaries-pp-error-before-after.png}}
+\includegraphics[width=0.9\linewidth]{periodic-table-unaries-pp-error-before-after.png}
 \caption{\label{fig:si_pp_before_after}
-\TDKin{Pseudopotential contribution before and after applying the UZH protocol. Top: original SIRIUS-GTH-UZH settings relative to SIRIUS-FP-LAPW. Bottom: improved SIRIUS-GTH-UZH-new settings relative to SIRIUS-FP-LAPW. Because both panels use SIRIUS on the pseudopotential side, the CP2K Gaussian basis is absent and the comparison isolates the pseudopotential transferability error.}}
+Pseudopotential contribution before and after applying the UZH protocol. Top: original SIRIUS-GTH-UZH settings relative to SIRIUS-FP-LAPW. Bottom: improved SIRIUS-GTH-UZH-new settings relative to SIRIUS-FP-LAPW. Because both panels use SIRIUS on the pseudopotential side, the CP2K Gaussian basis is absent and the comparison isolates the pseudopotential transferability error.}
 \end{figure}
 
 \begin{figure}
 \includegraphics[width=\linewidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-UZH-epsilon.png}
 \caption{\label{fig:si_pp_update}
-\TDKout{Direct comparison of the improved and original SIRIUS-GTH-UZH pseudopotential settings. This diagnostic shows where the pseudopotential update changes the equation-of-state curves and complements the residual basis-set, residual pseudopotential, and total-error maps in the main text.}\TDKin{Direct comparison of the improved and original SIRIUS-GTH-UZH pseudopotential settings. This diagnostic shows where the pseudopotential update changes the equation-of-state curves and complements the component-update, residual-component, and total-error maps in the main text.}}
+Direct comparison of the improved and original SIRIUS-GTH-UZH pseudopotential settings. This diagnostic shows where the pseudopotential update changes the equation-of-state curves and complements the component-update, residual-component, and total-error maps in the main text.}
 \end{figure}
-
-\TDKout{The mixed CP2K-GTH-UZH-new versus original SIRIUS-GTH-UZH diagnostic figure has been removed because it combines residual Gaussian-basis effects with the pseudopotential update and is therefore not a clean error decomposition.}
 
 \clearpage
 
 \section{Representative equation-of-state curves}
 
-The periodic-table heat maps in the main text are compact summaries of many equation-of-state calculations. \TDKin{Figures~\ref{fig:si_cr}, \ref{fig:si_ba}, \ref{fig:si_ne}, \ref{fig:si_au}, and \ref{fig:si_ga} show representative raw equation-of-state comparisons for elements that illustrate different error regimes.}
+The periodic-table heat maps in the main text are compact summaries of many equation-of-state calculations. Figures~\ref{fig:si_cr}, \ref{fig:si_ba}, \ref{fig:si_ne}, \ref{fig:si_au}, and \ref{fig:si_ga} show representative raw equation-of-state comparisons for elements that illustrate different error regimes.
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{Cr.pdf}
