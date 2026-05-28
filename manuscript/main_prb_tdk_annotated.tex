@@ -1,7 +1,4 @@
 \documentclass[aps,prb,reprint,amsmath,amssymb,superscriptaddress,longbibliography,floatfix]{revtex4-2}
-%DIF LATEXDIFF DIFFERENCE FILE
-%DIF DEL /tmp/main_prb_tdk_before_basis_order.tex   Tue May 26 22:50:05 2026
-%DIF ADD main_prb_tdk.tex                           Tue May 26 22:48:53 2026
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -10,51 +7,6 @@
 \usepackage{xcolor}
 \usepackage{booktabs}
 \usepackage{makecell}
-%DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
-%DIF CTRADITIONAL PREAMBLE %DIF PREAMBLE
-\RequirePackage{color}\definecolor{RED}{rgb}{1,0,0}\definecolor{BLUE}{rgb}{0,0,1} %DIF PREAMBLE
-\definecolor{TDKgreen}{rgb}{0,0.45,0}
-\RequirePackage[normalem]{ulem} %DIF PREAMBLE
-\RequirePackage[stable]{footmisc} %DIF PREAMBLE
-\DeclareOldFontCommand{\sf}{\normalfont\sffamily}{\mathsf} %DIF PREAMBLE
-\providecommand{\DIFadd}[1]{{\protect\color{blue} #1}} %DIF PREAMBLE
-\providecommand{\DIFdel}[1]{{\protect\color{red}#1}} %DIF PREAMBLE
-%DIF SAFE PREAMBLE %DIF PREAMBLE
-\providecommand{\DIFaddbegin}{} %DIF PREAMBLE
-\providecommand{\DIFaddend}{} %DIF PREAMBLE
-\providecommand{\DIFdelbegin}{} %DIF PREAMBLE
-\providecommand{\DIFdelend}{} %DIF PREAMBLE
-\providecommand{\DIFmodbegin}{} %DIF PREAMBLE
-\providecommand{\DIFmodend}{} %DIF PREAMBLE
-%DIF FLOATSAFE PREAMBLE %DIF PREAMBLE
-\providecommand{\DIFaddFL}[1]{\DIFadd{#1}} %DIF PREAMBLE
-\providecommand{\DIFdelFL}[1]{\DIFdel{#1}} %DIF PREAMBLE
-\providecommand{\DIFaddbeginFL}{} %DIF PREAMBLE
-\providecommand{\DIFaddendFL}{} %DIF PREAMBLE
-\providecommand{\DIFdelbeginFL}{} %DIF PREAMBLE
-\providecommand{\DIFdelendFL}{} %DIF PREAMBLE
-%DIF COLORLISTINGS PREAMBLE %DIF PREAMBLE
-\RequirePackage{listings} %DIF PREAMBLE
-\RequirePackage{color} %DIF PREAMBLE
-\lstdefinelanguage{DIFcode}{ %DIF PREAMBLE
-%DIF DIFCODE_CTRADITIONAL %DIF PREAMBLE
-  moredelim=[il][\color{red}\scriptsize]{\%DIF\ <\ }, %DIF PREAMBLE
-  moredelim=[il][\color{blue}\sffamily]{\%DIF\ >\ } %DIF PREAMBLE
-} %DIF PREAMBLE
-\lstdefinestyle{DIFverbatimstyle}{ %DIF PREAMBLE
-	language=DIFcode, %DIF PREAMBLE
-	basicstyle=\ttfamily, %DIF PREAMBLE
-	columns=fullflexible, %DIF PREAMBLE
-	keepspaces=true %DIF PREAMBLE
-} %DIF PREAMBLE
-\lstnewenvironment{DIFverbatim}{\lstset{style=DIFverbatimstyle}}{} %DIF PREAMBLE
-\lstnewenvironment{DIFverbatim*}{\lstset{style=DIFverbatimstyle,showspaces=true}}{} %DIF PREAMBLE
-\lstset{extendedchars=\true,inputencoding=utf8}
-\newcommand{\TDKin}[1]{\textcolor{blue}{#1}}
-\newcommand{\TDKout}[1]{\textcolor{red}{#1}}
-\newcommand{\TDKcomment}[1]{\textcolor{TDKgreen}{\textbf{[TDK:} #1\textbf{]}}}
-
-%DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
 
@@ -196,7 +148,8 @@ The first term measures the CP2K Gaussian-basis error for a fixed pseudopotentia
 \begin{equation}
 \varepsilon(a,b)=
 \sqrt{
-\frac{\sum_i \left[E_a(V_i)-E_b(V_i)\right]^2}{\sqrt{
+\frac{\sum_i \left[E_a(V_i)-E_b(V_i)\right]^2}
+{\sqrt{
 \sum_i\left[E_a(V_i)-\langle E_a\rangle\right]^2
 \sum_i\left[E_b(V_i)-\langle E_b\rangle\right]^2}}},
 \label{eq:epsilon}
@@ -262,9 +215,9 @@ Together, the main-text bond-length and polarizability benchmarks, complemented 
 
 Figure~\ref{fig:total_before_after} compares the total practical error of the original and improved CP2K-GTH-UZH settings relative to the SIRIUS-FP-LAPW reference. In the original settings, several elements exhibit $\varepsilon>1$ for at least two unary structures, including noble gases, selected transition metals, and heavier main-group elements. After applying the UZH protocol, the corresponding CP2K-GTH-UZH-new map is substantially cleaner, with the largest residual deviations confined to a smaller set of chemically interpretable cases. This before--after comparison is the error a user would observe if CP2K were treated as a black box. It is therefore the most direct measure of the protocol's practical accuracy, but by itself it does not reveal the origin of the discrepancy.
 
-\TDKin{The important point is that the outliers do not have a single chemical or numerical origin. Noble-gas solids are especially sensitive to the radial flexibility and diffuseness of the valence basis because their equation-of-state curves are shallow and dominated by weak interactions. Several transition-metal cases, in contrast, point to the quality of the frozen-core representation, semicore treatment, and scalar-relativistic transferability of the pseudopotential. Heavy main-group elements can combine both effects. The total-error map is therefore deliberately used as a starting point rather than as a final ranking of elements: it identifies where the original settings are insufficient, but the remedial action requires the decomposition in the next subsection.}
+The important point is that the outliers do not have a single chemical or numerical origin. Noble-gas solids are especially sensitive to the radial flexibility and diffuseness of the valence basis because their equation-of-state curves are shallow and dominated by weak interactions. Several transition-metal cases, in contrast, point to the quality of the frozen-core representation, semicore treatment, and scalar-relativistic transferability of the pseudopotential. Heavy main-group elements can combine both effects. The total-error map is therefore deliberately used as a starting point rather than as a final ranking of elements: it identifies where the original settings are insufficient, but the remedial action requires the decomposition in the next subsection.
 
-\TDKin{This distinction is central for interpreting $\varepsilon$. A large total error does not automatically mean that the CP2K Gaussian basis must be enlarged, and a small total error does not prove that basis and pseudopotential errors are individually negligible; partial cancellation is possible. For parameter development, the total CP2K-GTH-UZH versus SIRIUS-FP-LAPW comparison in Fig.~\ref{fig:total_before_after} has to be read together with the two intermediate comparisons summarized in Table~\ref{tab:classification}. Only then can the protocol decide whether the next iteration should modify the MOLOPT basis, refit the GTH pseudopotential parameters, or treat both components.}
+This distinction is central for interpreting $\varepsilon$. A large total error does not automatically mean that the CP2K Gaussian basis must be enlarged, and a small total error does not prove that basis and pseudopotential errors are individually negligible; partial cancellation is possible. For parameter development, the total CP2K-GTH-UZH versus SIRIUS-FP-LAPW comparison in Fig.~\ref{fig:total_before_after} has to be read together with the two intermediate comparisons summarized in Table~\ref{tab:classification}. Only then can the protocol decide whether the next iteration should modify the MOLOPT basis, refit the GTH pseudopotential parameters, or treat both components.
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{periodic-table-unaries-total-error-before-after.png}
@@ -274,31 +227,25 @@ Total equation-of-state error relative to SIRIUS-FP-LAPW, expressed with the $\v
 
 \begin{table*}
 \caption{\label{tab:classification}
-Qualitative classification of dominant error sources in the original UZH settings. The classification is based on the pairwise comparisons in Figs.~\TDKout{the previous decomposition and original-total-error maps}\TDKin{\ref{fig:total_before_after} and \ref{fig:pp_basis_old}}.}
+Qualitative classification of dominant error sources in the original UZH settings. The classification is based on the pairwise comparisons in Figs.~\ref{fig:total_before_after} and \ref{fig:pp_basis_old}.}
 \begin{ruledtabular}
 \begin{tabular}{lll}
 Dominant source & Diagnostic signature & Representative elements \\
 \hline
-\DIFdelFL{Pseudopotential} & \DIFdelFL{Large SIRIUS-GTH-UZH vs SIRIUS-FP-LAPW error} & \DIFdelFL{Ca, Cr, Pd, Rh, Ru, Tc} \\
 Basis set & Large CP2K-GTH-UZH vs SIRIUS-GTH-UZH error & He, Ne, Ar, Kr, Xe, Rn, Ba \\
-\DIFaddbeginFL \DIFaddFL{Pseudopotential }& \DIFaddFL{Large SIRIUS-GTH-UZH vs SIRIUS-FP-LAPW error }& \DIFaddFL{Ca, Cr, Pd, Rh, Ru, Tc }\\
-\DIFaddendFL Mixed & Both components visible & Hg and selected heavy elements \\
+Pseudopotential & Large SIRIUS-GTH-UZH vs SIRIUS-FP-LAPW error & Ca, Cr, Pd, Rh, Ru, Tc \\
+Mixed & Both components visible & Hg and selected heavy elements \\
 \end{tabular}
 \end{ruledtabular}
 \end{table*}
 
 \subsection{Separating basis and pseudopotential errors}
 
-The decomposition in Eq.~(\ref{eq:decomposition}) reveals three distinct regimes\TDKin{, which are shown in Fig.~\ref{fig:pp_basis_old} from top to bottom as basis-set and pseudopotential errors}. First, \DIFdelbegin \DIFdel{for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
-}%DIFDELCMD < 
+The decomposition in Eq.~(\ref{eq:decomposition}) reveals three distinct regimes, which are shown in Fig.~\ref{fig:pp_basis_old} from top to bottom as basis-set and pseudopotential errors. First, the noble gases and selected elements such as Ba are basis limited. SIRIUS-GTH-UZH agrees well with SIRIUS-FP-LAPW, indicating that the GTH-UZH pseudopotential is transferable for these tests, but CP2K-GTH-UZH deviates from SIRIUS-GTH-UZH. These cases point to missing diffuse or polarization flexibility in the Gaussian basis for weakly bound or highly compressible solids. This observation is physically plausible because noble-gas equation-of-state curves are shallow and therefore sensitive to small basis-set and basis-set-superposition effects.
 
-%DIFDELCMD < %%%
-\DIFdel{Second, the }\DIFdelend \DIFaddbegin \DIFadd{the }\DIFaddend noble gases and selected elements such as Ba are basis limited. SIRIUS-GTH-UZH agrees well with SIRIUS-FP-LAPW, indicating that the GTH-UZH pseudopotential is transferable for these tests, but CP2K-GTH-UZH deviates from SIRIUS-GTH-UZH. These cases point to missing diffuse or polarization flexibility in the Gaussian basis for weakly bound or highly compressible solids. This observation is physically plausible because noble-gas equation-of-state curves are shallow and therefore sensitive to small basis-set and basis-set-superposition effects.
+Second, for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
 
-\DIFaddbegin \DIFadd{Second, for elements such as Ca, Cr, Pd, Rh, Ru, and Tc, SIRIUS-GTH-UZH differs substantially from SIRIUS-FP-LAPW, while CP2K-GTH-UZH remains close to SIRIUS-GTH-UZH. These cases are pseudopotential limited. Improving the Gaussian basis alone would not remove the dominant error because the same discrepancy is already present in the plane-wave representation of the pseudopotential.
-}
-
-\DIFaddend Third, some heavy elements show mixed behavior. In these cases both pairwise comparisons are non-negligible, and the improvement strategy must combine \TDKout{pseudopotential refitting with basis-set extension or reoptimization}\TDKin{basis-set extension or reoptimization with pseudopotential refitting}.
+Third, some heavy elements show mixed behavior. In these cases both pairwise comparisons are non-negligible, and the improvement strategy must combine basis-set extension or reoptimization with pseudopotential refitting.
 
 \begin{figure*}
 \includegraphics[width=\textwidth]{periodic-table-unaries-CP2K-UZH-vs-SIRIUS-UZH-epsilon.png}\\[0.5ex]
@@ -309,7 +256,7 @@ Error decomposition for the original UZH settings. Top: CP2K-GTH-UZH relative to
 
 \subsection{Improved UZH settings}
 
-The classification in Table~\ref{tab:classification} was used to revise the settings in a targeted way. \DIFaddbegin \DIFadd{Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. }\DIFaddend Pseudopotential-limited elements were treated by refitting the GTH parameters with the CP2K ATOM code, including scalar-relativistic atomic reference information and semicore states where appropriate. \DIFdelbegin \DIFdel{Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. }\DIFdelend This targeted route differs from a brute-force convergence exercise: it changes only the component that the error decomposition identifies as limiting.
+The classification in Table~\ref{tab:classification} was used to revise the settings in a targeted way. Basis-limited elements were treated by extending or reoptimizing the UZH-MOLOPT basis while retaining the condition-number penalty that prevents unstable diffuse functions. Pseudopotential-limited elements were treated by refitting the GTH parameters with the CP2K ATOM code, including scalar-relativistic atomic reference information and semicore states where appropriate. This targeted route differs from a brute-force convergence exercise: it changes only the component that the error decomposition identifies as limiting.
 
 Figure~\ref{fig:component_updates} summarizes the component updates introduced by the UZH protocol. The top panel is a CP2K-side diagnostic for the basis-set update, shown as CP2K-GTH-UZH-new relative to the original SIRIUS-GTH-UZH reference; because the revised CP2K branch also accompanies the updated parameter set, this map is used to show where the Gaussian-basis revision changes the equation-of-state metric rather than as an independent residual-error decomposition. The bottom panel is the direct SIRIUS-GTH-UZH-new versus SIRIUS-GTH-UZH comparison and therefore shows where the pseudopotential refit modifies the plane-wave equation-of-state curves. Together with the total-error reduction in Fig.~\ref{fig:total_before_after}, these maps show that the improvement is not a cosmetic redistribution of errors but a targeted reduction of the components identified as limiting. The residual component estimate and the full pseudopotential before--after diagnostic are reported in the Supplemental Material.
 
