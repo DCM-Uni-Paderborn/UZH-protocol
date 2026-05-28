@@ -134,7 +134,7 @@ The molecular calibration assesses the revised UZH-MOLOPT basis sequence before 
 
 \clearpage
 
-\section{\TDKout{Additional pseudopotential-update diagnostic}\TDKin{Additional improved-setting diagnostic}}
+\section{\TDKout{Additional pseudopotential-update diagnostic}\TDKin{Additional improved-setting diagnostics}}
 
 \begin{figure}
 \centering
@@ -145,9 +145,16 @@ The molecular calibration assesses the revised UZH-MOLOPT basis sequence before 
 \end{figure}
 
 \begin{figure}
+\centering
+\TDKin{\includegraphics[width=0.9\linewidth]{periodic-table-unaries-pp-error-before-after.png}}
+\caption{\label{fig:si_pp_before_after}
+\TDKin{Pseudopotential contribution before and after applying the UZH protocol. Top: original SIRIUS-GTH-UZH settings relative to SIRIUS-FP-LAPW. Bottom: improved SIRIUS-GTH-UZH-new settings relative to SIRIUS-FP-LAPW. Because both panels use SIRIUS on the pseudopotential side, the CP2K Gaussian basis is absent and the comparison isolates the pseudopotential transferability error.}}
+\end{figure}
+
+\begin{figure}
 \includegraphics[width=\linewidth]{periodic-table-unaries-SIRIUS-UZH-new-vs-SIRIUS-UZH-epsilon.png}
 \caption{\label{fig:si_pp_update}
-\TDKout{Direct comparison of the improved and original SIRIUS-GTH-UZH pseudopotential settings. This diagnostic shows where the pseudopotential update changes the equation-of-state curves and complements the residual basis-set, residual pseudopotential, and total-error maps in the main text.}\TDKin{Direct comparison of the improved and original SIRIUS-GTH-UZH pseudopotential settings. This diagnostic shows where the pseudopotential update changes the equation-of-state curves and complements the residual pseudopotential and total-error maps in the main text.}}
+\TDKout{Direct comparison of the improved and original SIRIUS-GTH-UZH pseudopotential settings. This diagnostic shows where the pseudopotential update changes the equation-of-state curves and complements the residual basis-set, residual pseudopotential, and total-error maps in the main text.}\TDKin{Direct comparison of the improved and original SIRIUS-GTH-UZH pseudopotential settings. This diagnostic shows where the pseudopotential update changes the equation-of-state curves and complements the component-update, residual-component, and total-error maps in the main text.}}
 \end{figure}
 
 \TDKout{The mixed CP2K-GTH-UZH-new versus original SIRIUS-GTH-UZH diagnostic figure has been removed because it combines residual Gaussian-basis effects with the pseudopotential update and is therefore not a clean error decomposition.}
