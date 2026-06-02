@@ -1,13 +1,10 @@
-# CP2K-GTH-UZH workflow data
+# CP2K/GTH-UZH data
 
-This directory is reserved for CP2K-GTH-UZH workflow inputs, parsed outputs, and equation-of-state data.
+This directory contains CP2K verification data obtained with UZH Gaussian basis sets and GTH-UZH pseudopotentials.
 
-Expected contents before archival:
+- `original-settings/`: original CP2K/GTH-UZH equation-of-state results and diagnostics.
+- `improved-basis-settings/`: reruns after the production basis was improved.
+- `resubmissions/`: focused reruns used to complete or check selected entries.
+- `noble-gas-augmented-basis/`: tests of augmented noble-gas basis sets.
 
-- AiiDA export archive or workflow bundle.
-- CP2K input templates and submitted input files.
-- Parsed total energies, volumes, structures, and fitted equation-of-state parameters.
-- Metadata linking each calculation to the CP2K data files in `../../cp2k-data/`.
-
-The raw workflow archive was not present in the local Overleaf or Dropbox manuscript folders at the initial repository setup.
-
+The `results/` subdirectories contain parsed JSON workflow output. The `plots/` subdirectories contain equation-of-state PDFs. The original plotting directory names used `vs-fleur`; in this release they are grouped according to the SIRIUS FP-LAPW reference role used in the manuscript.

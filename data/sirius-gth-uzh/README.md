@@ -1,13 +1,10 @@
-# SIRIUS-GTH-UZH workflow data
+# SIRIUS/GTH-UZH data
 
-This directory is reserved for SIRIUS-GTH-UZH pseudopotential workflow inputs, parsed outputs, and equation-of-state data.
+This directory contains SIRIUS verification data with GTH-UZH pseudopotentials.
 
-Expected contents before archival:
+- `original-settings/`: SIRIUS/GTH-UZH calculations with the original pseudopotentials.
+- `improved-pseudopotentials/`: SIRIUS/GTH-UZH calculations with the updated pseudopotential file `POTENTIAL_NEW`.
+- `pseudopotential-update-comparison/`: focused old/new pseudopotential equation-of-state comparisons.
+- `sr-diamond-test/`: explicit Sr diamond input/output test case, including CP2K-style inputs and SIRIUS workflow files.
 
-- AiiDA export archive or workflow bundle.
-- SIRIUS input/species files using the same GTH-UZH pseudopotentials as CP2K.
-- Parsed total energies, volumes, structures, and fitted equation-of-state parameters.
-- Metadata identifying the pseudopotential files and SIRIUS version.
-
-The raw workflow archive was not present in the local Overleaf or Dropbox manuscript folders at the initial repository setup.
-
+These data are used with the SIRIUS FP-LAPW reference to isolate the pseudopotential contribution to the total error.

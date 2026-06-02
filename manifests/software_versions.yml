@@ -3,12 +3,20 @@ repository:
   url: https://github.com/DCM-Uni-Paderborn/UZH-protocol
 
 cp2k_data_source:
-  local_path: /Users/tkuehne/dropbox/cp2k_VScode/cp2k
-  git_commit: 5ce8c4d8426e
+  repository: https://github.com/cp2k/cp2k
+  git_commit: 49523fb0eb1b233f3eed4b10a00c7e14f2de2007
+  source_directory: data
   deposited_files:
     - cp2k-data/BASIS_MOLOPT_UZH
     - cp2k-data/BASIS_ADMM_UZH
+    - cp2k-data/BASIS_TB_UZH
+    - cp2k-data/BASIS_ccGRB_UZH
     - cp2k-data/POTENTIAL_UZH
+
+raw_data_sources:
+  cp2k_gth_uzh: /Users/tkuehne/dropbox/potential-fitting/GTH-UZH
+  sirius_gth_uzh: /Users/tkuehne/dropbox/potential-fitting/SIRIUS_UZH
+  sirius_fp_lapw: /Users/tkuehne/dropbox/potential-fitting/SIRIUS_lapw
 
 workflow_software:
   cp2k: to_be_added
@@ -16,4 +24,3 @@ workflow_software:
   aiida_core: to_be_added
   aiida_common_workflows: to_be_added
   plotting_environment: to_be_added
-

@@ -1,13 +1,5 @@
-# Molecular-calibration data
+# Molecular calibration
 
-This directory is reserved for the molecular calibration of the UZH-MOLOPT basis sequence.
+This directory records the release location for molecular basis-set calibration data associated with the UZH protocol.
 
-Expected contents before archival:
-
-- Molecular test-set definitions.
-- Gaussian and CP2K input files or generation scripts.
-- Parsed bond-length, angle, dipole, polarizability, and frequency statistics.
-- Tables underlying the molecular-calibration figures in `../../figures/`.
-
-The raw molecular-calibration tables were not present in the local Overleaf or Dropbox manuscript folders at the initial repository setup.
-
+The present data snapshot contains the CP2K/SIRIUS periodic verification outputs and the official CP2K UZH parameter files. Molecular calibration figures and tables are included with the manuscript material; additional raw molecular input/output tables can be added here without changing the repository layout.
