@@ -23,8 +23,21 @@ periodic_verification:
     noble_gas_augmented_basis: data/cp2k-gth-uzh/noble-gas-augmented-basis
     pseudopotential_update_comparison: data/sirius-gth-uzh/pseudopotential-update-comparison
     sr_diamond_test: data/sirius-gth-uzh/sr-diamond-test
+  postprocessing:
+    acwf_upstream_scripts: scripts/acwf-verification/upstream
+    uzh_epsilon_tables_script: scripts/epsilon/compute_uzh_epsilon_tables.py
+    derived_tables: data/derived-epsilon-tables
 
 molecular_calibration:
+  source_record: Zenodo record 7841955
+  deposited_data:
+    structures: data/molecular-calibration/structures/small-molecule-database
+    gaussian16_inputs: data/molecular-calibration/gaussian16/inputs
+    gaussian16_logs: data/molecular-calibration/gaussian16/logs
+    cp2k_inputs: data/molecular-calibration/cp2k/inputs
+    cp2k_optimized_structures: data/molecular-calibration/cp2k/optimized-structures
+    cp2k_run_scripts: data/molecular-calibration/cp2k/run-scripts
+    parsed_summaries: data/molecular-calibration/summaries
   properties:
     - bond lengths
     - bond angles
@@ -36,3 +49,11 @@ molecular_calibration:
     - DZVP
     - TZVP
     - TZV2P
+  all_electron_gapw_basis_sequence:
+    - SVP
+    - TZVPP
+    - QZVPP
+  functionals:
+    - PBE
+    - PBE0
+    - TPSS

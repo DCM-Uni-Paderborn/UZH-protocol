@@ -1,0 +1,76 @@
+  &GLOBAL                                                                        
+     PROJECT  li4cl4                                                             
+     PRINT_LEVEL low                                                             
+     RUN_TYPE VIBRATIONAL_ANALYSIS                                               
+     PREFERRED_DIAG_LIBRARY SL                                                   
+  &END GLOBAL                                                                    
+  &EXT_RESTART                                                                   
+    RESTART_FILE_NAME li4cl4-1.restart                                           
+    RESTART_POS TRUE                                                             
+  &END EXT_RESTART                                                               
+  &VIBRATIONAL_ANALYSIS                                                          
+     INTENSITIES T                                                               
+     NPROC_REP   -1                                                              
+  &END VIBRATIONAL_ANALYSIS                                                      
+  &FORCE_EVAL                                                                    
+     METHOD Quickstep                                                            
+     &DFT                                                                        
+        CHARGE            0                                                      
+        MULTIPLICITY            1                                                
+        BASIS_SET_FILE_NAME BASIS_MOLOPT_UZH                                     
+        POTENTIAL_FILE_NAME POTENTIAL_UZH                                        
+        &MGRID                                                                   
+            CUTOFF     720                                                       
+            REL_CUTOFF  60                                                       
+        &END MGRID                                                               
+        &QS                                                                      
+           METHOD GAPW
+           EPS_DEFAULT 1.E-14                                                    
+        &END QS                                                                  
+        &SCF                                                                     
+           SCF_GUESS RESTART                                                     
+           MAX_SCF 15                                                            
+           EPS_SCF 1.E-7                                                         
+           &OT                                                                   
+              PRECONDITIONER FULL_ALL                                            
+              MINIMIZER DIIS                                                     
+           &END OT                                                               
+           &OUTER_SCF                                                            
+             MAX_SCF 5                                                           
+             EPS_SCF 1.E-7                                                       
+           &END OUTER_SCF                                                        
+        &END SCF                                                                 
+        &POISSON                                                                 
+           PERIODIC NONE                                                         
+           POISSON_SOLVER MT                                                     
+        &END POISSON                                                             
+  @include xcdef                                                                 
+        &PRINT                                                                   
+           &MOMENTS                                                              
+              PERIODIC F                                                         
+              MAX_MOMENT 1                                                       
+           &END MOMENTS                                                          
+        &END PRINT                                                               
+     &END DFT                                                                    
+     &SUBSYS                                                                     
+        &CELL                                                                    
+          ABC      15.00000000    15.00000000    15.00000000                     
+           PERIODIC NONE                                                         
+        &END CELL                                                                
+        &COORD                                                                   
+ Li         10.45223172     7.97312278     9.00000000                            
+ Li          8.99999462    10.02687563    10.45224242                            
+ Li          7.54774851     7.97312890     9.00000000                            
+ Li          8.99999462    10.02687563     7.54775758                            
+ Cl         10.82861655    10.29303791     9.00000000                            
+ Cl          8.99999226     7.70695592    10.82861890                            
+ Cl          7.17138345    10.29304408     9.00000000                            
+ Cl          8.99999226     7.70695592     7.17138110                            
+        &END COORD                                                               
+        &PRINT                                                                   
+           &ATOMIC_COORDINATES                                                   
+           &END ATOMIC_COORDINATES                                               
+        &END PRINT                                                               
+  @include kinddef                                                               
+     &END SUBSYS                                                                 
+  &END FORCE_EVAL                                                                

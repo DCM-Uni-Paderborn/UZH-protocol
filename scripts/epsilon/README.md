@@ -1,6 +1,7 @@
 # Epsilon-metric scripts
 
-This directory is reserved for scripts used to fit equation-of-state curves and evaluate the epsilon metric reported in the manuscript.
+This directory contains UZH-specific wrappers for evaluating the equation-of-state epsilon metric from the deposited AiiDA common-workflows result JSON files.
 
-The original post-processing scripts were not present in the local Overleaf or Dropbox manuscript folders at the initial repository setup.
+- `compute_uzh_epsilon_tables.py` reads the CP2K-GTH-UZH, SIRIUS-GTH-UZH, and SIRIUS-FP-LAPW result files under `data/`, computes the epsilon values with the same metric implementation used by the ACWF verification scripts, and writes TSV tables under `data/derived-epsilon-tables/`.
 
+The upstream ACWF scripts and MIT license are vendored under `scripts/acwf-verification/`.

@@ -1,0 +1,70 @@
+  &GLOBAL                                                                        
+     PROJECT  h2so4                                                              
+     PRINT_LEVEL low                                                             
+     RUN_TYPE GEO_OPT                                                            
+     PREFERRED_DIAG_LIBRARY SL                                                   
+  &END GLOBAL                                                                    
+  &MOTION                                                                        
+     &GEO_OPT                                                                    
+        MAX_ITER 50                                                              
+     &END GEO_OPT                                                                
+  &END MOTION                                                                    
+  &FORCE_EVAL                                                                    
+     METHOD Quickstep                                                            
+     &DFT                                                                        
+        CHARGE            0                                                      
+        MULTIPLICITY            1                                                
+        BASIS_SET_FILE_NAME BASIS_MOLOPT_UZH                                     
+        POTENTIAL_FILE_NAME POTENTIAL_UZH                                        
+        &MGRID                                                                   
+            CUTOFF     720                                                       
+            REL_CUTOFF  60                                                       
+        &END MGRID                                                               
+        &QS                                                                      
+           METHOD GAPW
+           EPS_DEFAULT 1.E-14                                                    
+        &END QS                                                                  
+        &SCF                                                                     
+           SCF_GUESS ATOMIC                                                      
+           MAX_SCF 15                                                            
+           EPS_SCF 1.E-7                                                         
+           &OT                                                                   
+              PRECONDITIONER FULL_ALL                                            
+              MINIMIZER DIIS                                                     
+           &END OT                                                               
+           &OUTER_SCF                                                            
+             MAX_SCF 5                                                           
+             EPS_SCF 1.E-7                                                       
+           &END OUTER_SCF                                                        
+        &END SCF                                                                 
+        &POISSON                                                                 
+           PERIODIC NONE                                                         
+           POISSON_SOLVER MT                                                     
+        &END POISSON                                                             
+  @include xcdef                                                                 
+     &END DFT                                                                    
+     &SUBSYS                                                                     
+        &CELL                                                                    
+          ABC      15.00000000    15.00000000    15.00000000                     
+           PERIODIC NONE                                                         
+        &END CELL                                                                
+        &COORD                                                                   
+ S           8.49998570     8.50000130     8.70848447                            
+ O           9.77239581     8.49999911     9.43746580                            
+ O           7.22760419     8.49999910     9.43745854                            
+ O           8.49999358     9.67923399     7.56253420                            
+ O           8.49999357     7.32075585     7.56254398                            
+ H           8.49999351    10.52889556     8.05627853                            
+ H           8.49999351     6.47110444     8.05630306                            
+        &END COORD                                                               
+        &TOPOLOGY                                                                
+          &CENTER_COORDINATES                                                    
+          &END CENTER_COORDINATES                                                
+        &END TOPOLOGY                                                            
+        &PRINT                                                                   
+           &ATOMIC_COORDINATES                                                   
+           &END ATOMIC_COORDINATES                                               
+        &END PRINT                                                               
+  @include kinddef                                                               
+     &END SUBSYS                                                                 
+  &END FORCE_EVAL                                                                

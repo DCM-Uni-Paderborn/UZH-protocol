@@ -1,0 +1,6 @@
+#!/bin/bash -l
+source /data/hutter/GITHUB/CURRENT/cp2k/tools/toolchain/install/setup
+mpirun -np $1 /data/hutter/GITHUB/CURRENT/cp2k/exe/local/cp2k.popt $2-geo.inp > $2.results
+mpirun -np $1 /data/hutter/GITHUB/CURRENT/cp2k/exe/local/cp2k.popt $2-prop.inp >> $2.results
+mpirun -np $1 /data/hutter/GITHUB/CURRENT/cp2k/exe/local/cp2k.popt $2-vib.inp >> $2.results
+echo "finished  "$2

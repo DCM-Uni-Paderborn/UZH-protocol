@@ -1,0 +1,12 @@
+%mem=8GB
+%NProcShare=8
+#N UTPSSTPSS/Def2QZVPP scf=tight scf=XQC Int(Grid=ultrafine) OPT FREQ
+
+Mol job 1
+
+0 3
+Sb       8.00000000       8.00000000       7.01404329      
+F       8.00000000       8.00000000       8.98595671      
+
+
+

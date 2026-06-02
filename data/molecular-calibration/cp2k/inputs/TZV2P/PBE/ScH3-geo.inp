@@ -1,0 +1,66 @@
+ &GLOBAL
+    PROJECT  sch3
+    PRINT_LEVEL low
+    RUN_TYPE GEO_OPT
+    PREFERRED_DIAG_LIBRARY SL
+ &END GLOBAL
+ &MOTION
+    &GEO_OPT
+       MAX_ITER 50
+    &END GEO_OPT
+ &END MOTION
+ &FORCE_EVAL
+    METHOD Quickstep
+    &DFT
+       CHARGE            0
+       MULTIPLICITY            1
+       BASIS_SET_FILE_NAME BASIS_MOLOPT_UZH
+       POTENTIAL_FILE_NAME POTENTIAL_UZH
+       &MGRID
+           CUTOFF     720
+           REL_CUTOFF  60
+       &END MGRID
+       &QS
+          EPS_DEFAULT 1.E-14
+       &END QS
+       &SCF
+          SCF_GUESS ATOMIC
+          MAX_SCF 15
+          EPS_SCF 1.E-7
+          &OT
+             PRECONDITIONER FULL_ALL
+             MINIMIZER DIIS
+          &END OT
+          &OUTER_SCF
+            MAX_SCF 5
+            EPS_SCF 1.E-7
+          &END OUTER_SCF
+       &END SCF
+       &POISSON
+          PERIODIC NONE
+          POISSON_SOLVER MT
+       &END POISSON
+ @include xcdef
+    &END DFT
+    &SUBSYS
+       &CELL
+         ABC      14.00000000    14.00000000    14.00000000
+          PERIODIC NONE
+       &END CELL
+       &COORD
+Sc          8.45336520     8.00000000     8.00000000
+H           9.36009561     6.42949686     8.00000000
+H           9.36009561     9.57050314     8.00000000
+H           6.63990439     8.00000000     8.00000000
+       &END COORD
+       &TOPOLOGY
+         &CENTER_COORDINATES
+         &END CENTER_COORDINATES
+       &END TOPOLOGY
+       &PRINT
+          &ATOMIC_COORDINATES
+          &END ATOMIC_COORDINATES
+       &END PRINT
+ @include kinddef
+    &END SUBSYS
+ &END FORCE_EVAL

@@ -1,0 +1,82 @@
+  &GLOBAL                                                                        
+     PROJECT  cof2                                                               
+     PRINT_LEVEL low                                                             
+     RUN_TYPE LINEAR_RESPONSE                                                    
+     PREFERRED_DIAG_LIBRARY SL                                                   
+  &END GLOBAL                                                                    
+  &EXT_RESTART                                                                   
+    RESTART_FILE_NAME cof2-1.restart                                             
+    RESTART_POS TRUE                                                             
+  &END EXT_RESTART                                                               
+  &FORCE_EVAL                                                                    
+     METHOD Quickstep                                                            
+     &PROPERTIES                                                                 
+        &LINRES                                                                  
+           PRECONDITIONER FULL_ALL                                               
+           ENERGY_GAP  0.01                                                      
+           MAX_ITER 50                                                           
+           &POLAR                                                                
+              DO_RAMAN T                                                         
+              PERIODIC_DIPOLE_OPERATOR F                                         
+           &END POLAR                                                            
+        &END LINRES                                                              
+     &END PROPERTIES                                                             
+     &DFT                                                                        
+        LSD                                                                      
+        CHARGE            0                                                      
+        MULTIPLICITY            2                                                
+        BASIS_SET_FILE_NAME BASIS_MOLOPT_UZH                                     
+        POTENTIAL_FILE_NAME POTENTIAL_UZH                                        
+        &MGRID                                                                   
+            CUTOFF     720                                                       
+            REL_CUTOFF  60                                                       
+        &END MGRID                                                               
+        &QS                                                                      
+           METHOD GAPW
+           EPS_DEFAULT 1.E-14                                                    
+        &END QS                                                                  
+        &SCF                                                                     
+           SCF_GUESS RESTART                                                     
+           MAX_SCF 10                                                            
+           EPS_SCF 1.E-7                                                         
+        &END SCF                                                                 
+        &POISSON                                                                 
+           PERIODIC NONE                                                         
+           POISSON_SOLVER MT                                                     
+        &END POISSON                                                             
+  @include xcdef                                                                 
+        &PRINT                                                                   
+           &MOMENTS                                                              
+              PERIODIC F                                                         
+              MAX_MOMENT 2                                                       
+           &END MOMENTS                                                          
+           &MO                                                                   
+              EIGVALS T                                                          
+              &EACH                                                              
+                QS_SCF 0                                                         
+              &END EACH                                                          
+              ADD_LAST NUMERIC                                                   
+           &END MO                                                               
+           &MO_CUBES                                                             
+              NLUMO 1                                                            
+              WRITE_CUBE F                                                       
+           &END MO_CUBES                                                         
+        &END PRINT                                                               
+     &END DFT                                                                    
+     &SUBSYS                                                                     
+        &CELL                                                                    
+          ABC      14.00000000    14.00000000    14.00000000                     
+           PERIODIC NONE                                                         
+        &END CELL                                                                
+        &COORD                                                                   
+ Co          8.50000000     8.50000000     8.49368409                            
+ F          10.22700046     8.50000000     8.50631591                            
+ F           6.77299954     8.50000000     8.50631591                            
+        &END COORD                                                               
+        &PRINT                                                                   
+           &ATOMIC_COORDINATES                                                   
+           &END ATOMIC_COORDINATES                                               
+        &END PRINT                                                               
+  @include kinddef                                                               
+     &END SUBSYS                                                                 
+  &END FORCE_EVAL                                                                
