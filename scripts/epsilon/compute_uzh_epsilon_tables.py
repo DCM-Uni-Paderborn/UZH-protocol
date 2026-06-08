@@ -39,19 +39,19 @@ COMPARISONS = {
         "data/sirius-fp-lapw/reference",
     ),
     "basis_improved_subset": (
-        "CP2K-GTH-UZH-new",
-        "SIRIUS-GTH-UZH-new",
+        "CP2K-GTH-UZH-improved",
+        "SIRIUS-GTH-UZH-improved",
         "data/cp2k-gth-uzh/improved-basis-settings",
         "data/sirius-gth-uzh/improved-pseudopotentials",
     ),
     "pseudopotential_improved": (
-        "SIRIUS-GTH-UZH-new",
+        "SIRIUS-GTH-UZH-improved",
         "SIRIUS-FP-LAPW",
         "data/sirius-gth-uzh/improved-pseudopotentials",
         "data/sirius-fp-lapw/reference",
     ),
     "total_improved_subset": (
-        "CP2K-GTH-UZH-new",
+        "CP2K-GTH-UZH-improved",
         "SIRIUS-FP-LAPW",
         "data/cp2k-gth-uzh/improved-basis-settings",
         "data/sirius-fp-lapw/reference",
