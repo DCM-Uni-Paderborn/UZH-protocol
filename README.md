@@ -1,8 +1,10 @@
 # UZH protocol
 
-This repository is the release location for data and supporting files associated with the manuscript
+This repository is the release location for data and supporting files associated with the article
 
-> The UZH protocol: Separating and reducing Gaussian-basis and pseudopotential errors in CP2K
+> H. Mirhosseini, T. M. A. Müller, M. Krack, T. D. Kühne, and J. Hutter,
+> "The UZH protocol: Separating errors and constructing improved CP2K basis sets and pseudopotentials",
+> *J. Chem. Phys.* **165**, 104103 (2026). [DOI: 10.1063/5.0347392](https://doi.org/10.1063/5.0347392).
 
 The repository is organized around the three comparisons used in the manuscript:
 
@@ -18,6 +20,7 @@ The repository is organized around the three comparisons used in the manuscript:
 - `manuscript/`: manuscript and Supplemental Material sources, bibliography, and compiled PDFs.
 - `manifests/`: file hashes, source provenance, and workflow-organization metadata.
 - `scripts/`: ACWF verification scripts, UZH-specific epsilon-table generation, and plotting notes.
+- `contributions/basis-set-exchange/`: reproducible BSE conversion, exact numerical validation, and basis/potential pairing, including the all-electron bases and the JCP reference.
 
 ## Data layout
 
@@ -40,6 +43,9 @@ The JSON files contain the parsed equation-of-state data, Birch-Murnaghan fit da
 ## Provenance
 
 The CP2K UZH data files were updated from the public CP2K repository at commit `49523fb0eb1b233f3eed4b10a00c7e14f2de2007`.
+The native orbital-basis file was subsequently aligned with CP2K's `BASIS_MOLOPT_UZH_2026.2`
+(Git blob `3b09dde1d0ee05e962553d2158f0c1b84a1d460b`): the Calcium PBE0 TZV2P header,
+the capitalization of one Sodium header, and a comment typo were corrected without changing any numerical parameter.
 
 The workflow outputs were reorganized from the local working directories:
 
